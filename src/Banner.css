@@ -1,0 +1,35 @@
+.banner {
+  color: white;
+  object-fit: contain;
+  height: 40rem;
+  margin-bottom: 2rem;
+}
+
+.black_cover {
+  position: absolute;
+  height: 40rem;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 500ms;
+}
+.banner_content {
+  position: relative;
+  margin-left: 30px;
+  padding-top: 140px;
+}
+.banner_title {
+  font-size: 5rem;
+  font-weight: 800;
+  padding-bottom: 0.3rem;
+}
+.banner_decription {
+  width: 45rem;
+  line-height: 1.5;
+  padding-top: 1rem;
+  font-size: 1rem;
+  max-width: 360px;
+  height: 80px;
+}
+.banner:hover > .black_cover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
