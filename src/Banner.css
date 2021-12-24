@@ -44,6 +44,7 @@
   height: 100%;
   flex-direction: row;
   align-items: center;
+  background-color: black;
 }
 .video_trailer {
   height: 100%;
