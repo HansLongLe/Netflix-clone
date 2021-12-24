@@ -55,12 +55,17 @@ function Banner() {
             <ReactPlayer
               repeat
               className="react-player"
-              url={trailerUrl}
+              url={trailerUrl[1]}
               width="100%"
               height="100%"
               config={{
                 youtube: {
-                  playerVars: { showinfo: 0, autoplay: 1 },
+                  playerVars: {
+                    showinfo: 0,
+                    autoplay: 1,
+                    loop: 1,
+                    playlist: trailerUrl[0],
+                  },
                 },
               }}
             />
