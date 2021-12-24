@@ -2,7 +2,7 @@ import axios from "./axios";
 import React, { useEffect, useState } from "react";
 import requests from "./requests";
 import "./Banner.css";
-import Youtube from "react-youtube";
+import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovie } from "./redux/movieSlice";
 
@@ -29,10 +29,11 @@ function Banner() {
   }, []);
 
   const opts = {
-    height: "490",
+    height: "485",
     width: "100%",
     playerVars: {
       autoplay: 1,
+      controls: 0,
     },
   };
 
@@ -59,7 +60,19 @@ function Banner() {
           </h1>
         </div>
         <div className="video_trailer">
-          {trailerUrl && <Youtube videoId={trailerUrl} opts={opts} />}
+          {trailerUrl && (
+            <ReactPlayer
+              className="react-player"
+              url={trailerUrl}
+              width="100%"
+              height="100%"
+              config={{
+                youtube: {
+                  playerVars: { showinfo: 0, autoplay: 1 },
+                },
+              }}
+            />
+          )}
         </div>
       </div>
     </header>
