@@ -25,8 +25,8 @@ function Banner() {
   }, []);
 
   const opts = {
-    height: "400",
-    width: "80%",
+    height: "485",
+    width: "100%",
     playerVars: {
       autoplay: 1,
     },

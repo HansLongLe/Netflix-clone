@@ -44,8 +44,11 @@
   height: 100%;
   flex-direction: row;
   align-items: center;
+  background-color: black;
 }
 .video_trailer {
+  height: 100%;
   width: 100%;
   z-index: 1;
+  margin-right: 5%;
 }
