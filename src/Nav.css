@@ -5,13 +5,8 @@
   padding: 30px;
   height: 2rem;
   z-index: 1;
+}
 
-  transition-timing-function: ease-in;
-  transition: all 0.5s;
-}
-.nav_black {
-  background-color: rgba(0, 0, 0, 0.85);
-}
 .nav_logo {
   position: fixed;
   left: 1.5rem;
