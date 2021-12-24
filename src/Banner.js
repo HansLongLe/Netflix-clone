@@ -29,10 +29,11 @@ function Banner() {
   }, []);
 
   const opts = {
-    height: "490",
+    height: "485",
     width: "100%",
     playerVars: {
       autoplay: 1,
+      controls: 0,
     },
   };
 
