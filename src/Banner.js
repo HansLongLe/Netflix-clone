@@ -3,21 +3,25 @@ import React, { useEffect, useState } from "react";
 import requests from "./requests";
 import "./Banner.css";
 import Youtube from "react-youtube";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovie } from "./redux/movieSlice";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Banner() {
-  const [movie, setMovie] = useState([]);
+  const { movie } = useSelector((state) => state.movie);
   const { trailerUrl } = useSelector((state) => state.trailer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(requests.fetchNetflixOriginals);
-      setMovie(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length)
-        ]
+      dispatch(
+        setMovie(
+          request.data.results[
+            Math.floor(Math.random() * request.data.results.length)
+          ]
+        )
       );
       return request;
     }
@@ -25,8 +29,8 @@ function Banner() {
   }, []);
 
   const opts = {
-    height: "400",
-    width: "80%",
+    height: "490",
+    width: "100%",
     playerVars: {
       autoplay: 1,
     },

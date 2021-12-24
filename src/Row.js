@@ -4,12 +4,14 @@ import "./Row.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setTrailerUrl } from "./redux/trailerSlice";
 import movieTrailer from "movie-trailer";
+import { setMovie } from "./redux/movieSlice";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const { trailerUrl } = useSelector((state) => state.trailer);
+  const { movie } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,6 +24,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
   }, [fetchUrl]);
 
   const handleClick = (movie, trailerUrl) => {
+    dispatch(setMovie(movie));
+
     if (trailerUrl) {
       dispatch(setTrailerUrl(""));
     } else {
