@@ -28,15 +28,6 @@ function Banner() {
     fetchData();
   }, []);
 
-  const opts = {
-    height: "485",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-    },
-  };
-
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
@@ -62,13 +53,19 @@ function Banner() {
         <div className="video_trailer">
           {trailerUrl && (
             <ReactPlayer
+              repeat
               className="react-player"
-              url={trailerUrl}
+              url={trailerUrl[1]}
               width="100%"
               height="100%"
               config={{
                 youtube: {
-                  playerVars: { showinfo: 0, autoplay: 1 },
+                  playerVars: {
+                    showinfo: 0,
+                    autoplay: 1,
+                    loop: 1,
+                    playlist: trailerUrl[0],
+                  },
                 },
               }}
             />

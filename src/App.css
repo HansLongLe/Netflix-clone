@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  scroll-behavior: smooth;
 }
 body {
   background-color: black;
@@ -13,4 +14,17 @@ body {
 }
 .rows {
   margin-top: 50vh;
+  padding-top: 50vh;
+}
+article {
+  height: 50vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-padding: 50px;
+}
+article section {
+  scroll-snap-align: start;
+}
+section {
+  height: 50vh;
 }

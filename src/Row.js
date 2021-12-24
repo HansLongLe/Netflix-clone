@@ -33,9 +33,10 @@ function Row({ title, fetchUrl, isLargeRow }) {
         .then((url) => {
           const urlParameters = new URLSearchParams(new URL(url).search);
           dispatch(
-            setTrailerUrl(
-              `https://www.youtube.com/embed/${urlParameters.get("v")}`
-            )
+            setTrailerUrl([
+              urlParameters.get("v"),
+              `https://www.youtube.com/embed/${urlParameters.get("v")}`,
+            ])
           );
         })
         .catch((error) => console.log(error));

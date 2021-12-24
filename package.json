@@ -15,7 +15,6 @@
     "react-player": "^2.9.0",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
-    "react-youtube": "^7.13.1",
     "swiper": "^7.3.4",
     "web-vitals": "^2.1.2"
   },
