@@ -8,9 +8,6 @@ import Nav from "./Nav";
 function App() {
   return (
     <div className="App">
-      <div className="header">
-        <Banner />
-      </div>
       <article className="rows">
         <section>
           <Row
@@ -41,6 +38,9 @@ function App() {
           <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
         </section>
       </article>
+      <div className="header">
+        <Banner />
+      </div>
       <Nav />
     </div>
   );

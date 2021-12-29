@@ -20,7 +20,7 @@ article {
   height: 50vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  scroll-padding: 50px;
+  scroll-padding: 2%;
 }
 article section {
   scroll-snap-align: start;
