@@ -17,6 +17,7 @@
   opacity: 0.6;
   background-color: black;
   cursor: pointer;
+  margin: 5%;
 }
 .row_posterLarge {
   object-fit: contain;
@@ -26,16 +27,24 @@
   opacity: 0.6;
   background-color: black;
   cursor: pointer;
+  margin: 5%;
 }
 
 .row_poster:hover,
 .row_posterLarge:hover {
   transform: scale(1.1);
   opacity: 1;
+  margin-top: 2%;
 }
 .row_title {
   color: white;
   margin-left: 1rem;
+}
+
+.chosenMovie {
+  transform: scale(1.1);
+  opacity: 1;
+  margin-top: 2%;
 }
 
 .swiper-button-prev {

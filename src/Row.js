@@ -16,6 +16,7 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const { trailerUrl } = useSelector((state) => state.trailer);
+  const { movie } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
 
   SwiperCore.use([Navigation]);
@@ -75,16 +76,18 @@ function Row({ title, fetchUrl, isLargeRow }) {
             }}
             className="mySwiper"
           >
-            {movies.map((movie) => (
+            {movies.map((tempMovie) => (
               <SwiperSlide>
                 <img
-                  key={movie.id}
-                  onClick={() => handleClick(movie, trailerUrl)}
-                  className={isLargeRow ? "row_posterLarge" : "row_poster"}
+                  key={tempMovie.id}
+                  onClick={() => handleClick(tempMovie, trailerUrl)}
+                  className={`${
+                    isLargeRow ? "row_posterLarge " : "row_poster "
+                  } ${tempMovie.id === movie.id ? "chosenMovie" : ""}`}
                   src={`${base_url}${
-                    isLargeRow ? movie.poster_path : movie.backdrop_path
+                    isLargeRow ? tempMovie.poster_path : tempMovie.backdrop_path
                   }`}
-                  alt={movie.name}
+                  alt={tempMovie.name}
                 />
               </SwiperSlide>
             ))}
@@ -104,21 +107,23 @@ function Row({ title, fetchUrl, isLargeRow }) {
               },
               1200: {
                 slidesPerView: 4,
-                spaceBetween: 30,
+                spaceBetween: 50,
               },
             }}
             className="mySwiper"
           >
-            {movies.map((movie) => (
+            {movies.map((tempMovie) => (
               <SwiperSlide>
                 <img
-                  key={movie.id}
-                  onClick={() => handleClick(movie, trailerUrl)}
-                  className={isLargeRow ? "row_posterLarge" : "row_poster"}
+                  key={tempMovie.id}
+                  onClick={() => handleClick(tempMovie, trailerUrl)}
+                  className={`${
+                    isLargeRow ? "row_posterLarge " : "row_poster "
+                  } ${tempMovie.id === movie.id ? "chosenMovie" : ""}`}
                   src={`${base_url}${
-                    isLargeRow ? movie.poster_path : movie.backdrop_path
+                    isLargeRow ? tempMovie.poster_path : tempMovie.backdrop_path
                   }`}
-                  alt={movie.name}
+                  alt={tempMovie.name}
                 />
               </SwiperSlide>
             ))}
