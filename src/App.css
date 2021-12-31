@@ -2,29 +2,35 @@
   margin: 0;
   scroll-behavior: smooth;
 }
+
 body {
   background-color: black;
 }
+
 .header {
+  height: 50vh;
+  width: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
   left: 0;
+  margin-bottom: 1vh;
 }
-.rows {
-  margin-top: 50vh;
-  padding-top: 50vh;
-}
+
 article {
+  padding-top: 50vh;
+  margin-top: 49vh;
   height: 50vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  scroll-padding: 2%;
+  scroll-padding: 5%;
 }
+
 article section {
   scroll-snap-align: start;
 }
+
 section {
   height: 50vh;
 }

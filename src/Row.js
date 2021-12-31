@@ -70,7 +70,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
               },
               1200: {
                 slidesPerView: 7,
-                spaceBetween: 16,
+                spaceBetween: 15,
               },
             }}
             className="mySwiper"
@@ -103,7 +103,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 spaceBetween: 15,
               },
               1200: {
-                slidesPerView: 3,
+                slidesPerView: 4,
+                spaceBetween: 30,
               },
             }}
             className="mySwiper"

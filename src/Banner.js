@@ -32,6 +32,10 @@ function Banner() {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
 
+  function truncateDate(str, n) {
+    return str?.length > n ? str.substr(0, n - 1) : str;
+  }
+
   return (
     <header
       className="banner"
@@ -46,6 +50,20 @@ function Banner() {
           <h1 className="banner_title">
             {movie?.title || movie?.name || movie?.original_name}
           </h1>
+          <div className="movieMeta_data">
+            <h1 className="rating">{movie.vote_average / 2}</h1>
+            <div
+              className="stars"
+              style={{
+                "--rating": movie.vote_average / 2,
+                display: "inline-block",
+              }}
+            ></div>
+            <h1 className="release_date">
+              {truncateDate(movie.first_air_date, 5)}
+            </h1>
+            {console.log(movie)}
+          </div>
           <h1 className="banner_decription">
             {truncate(movie?.overview, 250)}
           </h1>

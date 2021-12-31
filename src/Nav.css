@@ -12,6 +12,11 @@
   left: 1.5rem;
   width: 150px;
   object-fit: contain;
+  transition: transform 0.5s;
+}
+
+.nav_logo:hover {
+  transform: scale(1.05);
 }
 
 .nav_avatar {
@@ -19,4 +24,9 @@
   width: 45px;
   right: 1.5rem;
   object-fit: contain;
+  transition: transform 0.5s;
+}
+
+.nav_avatar:hover {
+  transform: scale(1.2);
 }
