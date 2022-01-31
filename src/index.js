@@ -5,11 +5,28 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MovieDescriptionPage from "./MovieDescriptionPage";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+
+const persistor = persistStore(store);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<App />} />
+            <Route
+              exact
+              path="/movies/:movieId"
+              element={<MovieDescriptionPage />}
+            />
+          </Routes>
+        </Router>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,0 +1,80 @@
+.moviePage {
+  width: 100%;
+  height: 100vh;
+  color: white;
+}
+
+.movieHeader {
+  width: 100%;
+  height: 15%;
+}
+
+.movieContent {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+}
+
+.moviePoster {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.movieInformation {
+  width: 60%;
+  height: 100%;
+}
+.movieTitle {
+  font-size: 30pt;
+}
+img {
+  max-width: 100%;
+  max-height: 90%;
+}
+
+.movieBasicInformation {
+  width: 20%;
+  color: gray;
+  opacity: 0.7;
+  display: flex;
+  flex-direction: row;
+}
+
+h5 {
+  margin-right: auto;
+}
+
+.movieDescription {
+  margin-top: 10%;
+}
+
+.descriptionHeader {
+  display: flex;
+  border-bottom: rgba(95, 95, 95, 0.5) solid 1px;
+  width: 95%;
+}
+
+.descriptionHeaderItem {
+  padding: 2%;
+  margin-right: auto;
+  color: gray;
+  opacity: 0.7;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.descriptionHeaderItem:hover {
+  color: white;
+}
+.chosenHeaderItem {
+  border-bottom: red solid 5px;
+  opacity: 1;
+  color: white;
+}
+.descriptionBody {
+  margin-top: 5%;
+}

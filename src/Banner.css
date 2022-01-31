@@ -43,6 +43,7 @@
   font-size: 0.8rem;
   max-width: 360px;
   height: 80px;
+  padding-bottom: 5%;
 }
 
 .banner:hover > .black_cover {
@@ -101,4 +102,60 @@
 .release_date {
   font-size: 100%;
   margin-left: 3%;
+}
+
+.bannerButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.overviewButton {
+  width: 100px;
+  height: 40px;
+  background-color: rgb(184, 0, 0);
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 5px 0 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.overviewButton:hover {
+  background-color: rgb(220, 0, 0);
+  box-shadow: 0px 0px 5px 0.3px rgb(220, 0, 0);
+  transform: scale(1.03);
+}
+
+.overviewText {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.myListButton {
+  width: 100px;
+  height: 40px;
+  background-color: rgb(153, 153, 153);
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 5px 0 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.myListButton:hover {
+  background-color: rgb(184, 183, 183);
+  box-shadow: 0px 0px 5px 0.3px rgb(184, 183, 183);
+  transform: scale(1.03);
+}
+
+.myListText {
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
 }

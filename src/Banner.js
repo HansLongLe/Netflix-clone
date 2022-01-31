@@ -1,10 +1,14 @@
 import axios from "./axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import requests from "./requests";
 import "./Banner.css";
 import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { setMovie } from "./redux/movieSlice";
+import { setTrailerUrl } from "./redux/trailerSlice";
+import { TiThList } from "react-icons/ti";
+import { IoAdd } from "react-icons/io5";
+import { Outlet, Link } from "react-router-dom";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -23,6 +27,7 @@ function Banner() {
           ]
         )
       );
+      dispatch(setTrailerUrl(["", ""]));
       return request;
     }
     fetchData();
@@ -56,7 +61,6 @@ function Banner() {
               className="stars"
               style={{
                 "--rating": movie.vote_average / 2,
-                display: "inline-block",
               }}
             ></div>
             <h1 className="release_date">
@@ -67,6 +71,24 @@ function Banner() {
           <h1 className="banner_decription">
             {truncate(movie?.overview, 250)}
           </h1>
+          <div className="bannerButtons">
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to={{
+                pathname: `/movies/${movie.id}`,
+              }}
+            >
+              <div className="overviewButton">
+                <TiThList />
+                <h1 className="overviewText">Overview</h1>
+              </div>
+            </Link>
+            <div className="myListButton">
+              <IoAdd />
+              <h1 className="myListText">My List</h1>
+            </div>
+            <Outlet />
+          </div>
         </div>
         <div className="video_trailer">
           {trailerUrl && (
