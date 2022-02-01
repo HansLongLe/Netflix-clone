@@ -30,3 +30,20 @@
 .nav_avatar:hover {
   transform: scale(1.2);
 }
+.searchDiv {
+  position: fixed;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  color: rgb(214, 214, 214);
+}
+.searchIcon {
+  margin-right: 1%;
+}
+.searchBox {
+  color: rgb(214, 214, 214);
+  background-color: transparent;
+  border: rgb(214, 214, 214) solid 2px;
+  border-radius: 5px;
+  width: 15%;
+}

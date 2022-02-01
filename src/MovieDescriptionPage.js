@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import axios from "./axios";
 import { useEffect, useState } from "react";
 import MovieDescriptionOverview from "./MovieDescriptionOverview";
+import Nav from "./Nav";
+import MovieDescriptionTrailer from "./MovieDescriptionTrailer";
 
 function MovieDescriptionPage() {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -18,20 +20,32 @@ function MovieDescriptionPage() {
 
   useEffect(() => {
     async function fetchData() {
-      var request = await axios.get(
-        `/movie/${movie.id}?api_key=23840f43207af50d077b3fccc094a034&language=en-US`
-      );
-      if (
-        request.data.title !== movie.name ||
-        request.data.original_title !== movie.original_name ||
-        request.data.name ||
-        movie.name
-      ) {
+      try {
+        var request = await axios.get(
+          `/tv/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
+        );
+      } catch (err) {
         request = await axios.get(
-          `/tv/${movie.id}?api_key=23840f43207af50d077b3fccc094a034&language=en-US`
+          `/movie/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
+        );
+      }
+
+      if (
+        (request.data.original_title !== undefined &&
+          movie.original_title !== undefined &&
+          request.data.original_title === movie.original_title) ||
+        (request.data.original_name !== undefined &&
+          movie.original_name !== undefined &&
+          request.data.original_name === movie.original_name)
+      ) {
+        setMovieInfo(request.data);
+      } else {
+        request = await axios.get(
+          `/movie/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
         );
         setMovieInfo(request.data);
       }
+
       console.log(request.data);
       console.log(movie);
 
@@ -43,7 +57,9 @@ function MovieDescriptionPage() {
 
   return (
     <div className="moviePage">
-      <div className="movieHeader"></div>
+      <div className="movieHeader">
+        <Nav />
+      </div>
       <div className="movieContent">
         <div className="moviePoster">
           <img
@@ -58,15 +74,25 @@ function MovieDescriptionPage() {
           <div className="movieBasicInformation">
             {movieInfo !== null ? (
               <>
-                <h5>{truncateDate(movie.first_air_date, 5)}</h5>
-                <h5>|</h5>
                 <h5>
-                  {movieInfo.seasons.length === 1
-                    ? movieInfo.seasons.length + " season"
-                    : movieInfo.seasons.length + " seasons"}
+                  {truncateDate(movie?.first_air_date, 5) ||
+                    truncateDate(movie?.release_date, 5)}
                 </h5>
-                <h5>|</h5>
-                <h5>{movieInfo.episode_run_time[0]} min</h5>
+                {movieInfo.hasOwnProperty("seasons") ? <h5>|</h5> : ""}
+
+                <h5>
+                  {movieInfo.hasOwnProperty("seasons")
+                    ? movieInfo.seasons.length === 1
+                      ? movieInfo.seasons.length + " season"
+                      : movieInfo.seasons.length + " seasons"
+                    : ""}
+                </h5>
+                {movieInfo.hasOwnProperty("episode_run_time") ? <h5>|</h5> : ""}
+                <h5>
+                  {movieInfo.hasOwnProperty("episode_run_time")
+                    ? movieInfo.episode_run_time[0] + " min"
+                    : ""}
+                </h5>
               </>
             ) : (
               <></>
@@ -80,7 +106,6 @@ function MovieDescriptionPage() {
                   chosenHeaderItem === 0 ? "chosenHeaderItem" : ""
                 }`}
               >
-                {console.log(chosenHeaderItem[0])}
                 OVERVIEW
               </h2>
               <h2
@@ -108,7 +133,12 @@ function MovieDescriptionPage() {
                 REVIEWS
               </h2>
             </div>
-            <MovieDescriptionOverview headerItem={chosenHeaderItem} />
+            <MovieDescriptionOverview
+              headerItem={chosenHeaderItem}
+              movie={movie}
+              movieInfo={movieInfo}
+            />
+            <MovieDescriptionTrailer headerItem={chosenHeaderItem} />
           </div>
         </div>
       </div>

@@ -49,6 +49,8 @@ h5 {
 }
 
 .movieDescription {
+  height: 50%;
+  width: 95%;
   margin-top: 10%;
 }
 
