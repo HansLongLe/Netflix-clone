@@ -1,0 +1,34 @@
+.sortingPanel {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(26, 26, 26);
+}
+.movieSortingTitle {
+  font-size: 13pt;
+  margin-top: 5%;
+  padding-bottom: 2%;
+  color: rgb(213, 213, 213);
+  border-bottom: rgb(213, 213, 213) solid 1px;
+}
+.movieGenreItem {
+  font-size: 9pt;
+  margin-top: 1%;
+  cursor: pointer;
+  color: rgb(187, 187, 187);
+}
+.tvSortingTitle {
+  font-size: 13pt;
+  margin-top: 5%;
+  padding-bottom: 2%;
+  color: rgb(213, 213, 213);
+  border-bottom: rgb(213, 213, 213) solid 1px;
+}
+.tvGenreItem {
+  font-size: 9pt;
+  margin-top: 1%;
+  cursor: pointer;
+  color: rgb(187, 187, 187);
+}

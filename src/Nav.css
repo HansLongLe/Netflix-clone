@@ -1,18 +1,22 @@
 .nav {
-  position: fixed;
   top: 0;
   width: 100%;
-  padding: 30px;
-  height: 2rem;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  height: 10%;
   z-index: 1;
+  position: relative;
 }
 
 .nav_logo {
   position: fixed;
   left: 1.5rem;
   width: 150px;
+  height: 50px;
   object-fit: contain;
   transition: transform 0.5s;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .nav_logo:hover {
@@ -25,25 +29,60 @@
   right: 1.5rem;
   object-fit: contain;
   transition: transform 0.5s;
+  cursor: pointer;
 }
 
 .nav_avatar:hover {
   transform: scale(1.2);
 }
+
+.browseDiv {
+  position: fixed;
+  width: 5%;
+  height: 50px;
+  color: rgb(112, 112, 112);
+  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+.browseDiv:hover {
+  color: rgb(214, 214, 214);
+  transform: scale(1.1);
+}
 .searchDiv {
   position: fixed;
-  width: 50%;
+  width: 20%;
+  height: 50px;
+  color: rgb(112, 112, 112);
+  margin-left: 300px;
   display: flex;
-  justify-content: center;
-  color: rgb(214, 214, 214);
+  align-items: center;
 }
 .searchIcon {
-  margin-right: 1%;
+  margin-left: 15%;
+  margin-right: 5%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.searchIcon:hover {
+  color: rgb(214, 214, 214);
+  transform: scale(1.2);
 }
 .searchBox {
-  color: rgb(214, 214, 214);
+  color: rgb(112, 112, 112);
   background-color: transparent;
-  border: rgb(214, 214, 214) solid 2px;
-  border-radius: 5px;
-  width: 15%;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  /* border: rgb(112, 112, 112) solid 2px;
+  border-radius: 5px; */
+  width: 30%;
+}
+.searchBox:focus {
+  outline: none;
+  color: rgb(214, 214, 214);
 }

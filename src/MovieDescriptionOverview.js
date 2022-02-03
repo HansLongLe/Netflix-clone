@@ -1,7 +1,9 @@
 import React from "react";
 import "./MovieDescriptionOverview.css";
+import { useSelector } from "react-redux";
 
-function MovieDescriptionOverview({ headerItem, movie, movieInfo }) {
+function MovieDescriptionOverview({ headerItem, movieInfo }) {
+  const { movie } = useSelector((state) => state.movie);
   return (
     <div className="descriptionBody">
       {headerItem === 0 ? (

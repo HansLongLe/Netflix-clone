@@ -9,6 +9,7 @@ import { setTrailerUrl } from "./redux/trailerSlice";
 import { TiThList } from "react-icons/ti";
 import { IoAdd } from "react-icons/io5";
 import { Outlet, Link } from "react-router-dom";
+import Nav from "./Nav";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -49,6 +50,7 @@ function Banner() {
         backgroundImage: `url(${base_url}${movie?.backdrop_path})`,
       }}
     >
+      <Nav style={{ zIndex: "99" }} />
       <div className="black_cover"></div>
       <div className="banner_divider">
         <div className="banner_content">
@@ -69,7 +71,7 @@ function Banner() {
             {console.log(movie)}
           </div>
           <h1 className="banner_decription">
-            {truncate(movie?.overview, 250)}
+            {truncate(movie?.overview, 200)}
           </h1>
           <div className="bannerButtons">
             <Link
@@ -96,8 +98,8 @@ function Banner() {
               repeat
               className="react-player"
               url={trailerUrl[1]}
-              width="100%"
-              height="100%"
+              width="90%"
+              height="90%"
               config={{
                 youtube: {
                   playerVars: {

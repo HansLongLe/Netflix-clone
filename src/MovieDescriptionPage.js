@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import MovieDescriptionOverview from "./MovieDescriptionOverview";
 import Nav from "./Nav";
 import MovieDescriptionTrailer from "./MovieDescriptionTrailer";
+import MovieDescriptionSimilar from "./MovieDescriptionSimilar";
 
 function MovieDescriptionPage() {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -24,22 +25,22 @@ function MovieDescriptionPage() {
         var request = await axios.get(
           `/tv/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
         );
+        if (
+          (request.data.original_title !== undefined &&
+            movie.original_title !== undefined &&
+            request.data.original_title === movie.original_title) ||
+          (request.data.original_name !== undefined &&
+            movie.original_name !== undefined &&
+            request.data.original_name === movie.original_name)
+        ) {
+          setMovieInfo(request.data);
+        } else {
+          request = await axios.get(
+            `/movie/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
+          );
+          setMovieInfo(request.data);
+        }
       } catch (err) {
-        request = await axios.get(
-          `/movie/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
-        );
-      }
-
-      if (
-        (request.data.original_title !== undefined &&
-          movie.original_title !== undefined &&
-          request.data.original_title === movie.original_title) ||
-        (request.data.original_name !== undefined &&
-          movie.original_name !== undefined &&
-          request.data.original_name === movie.original_name)
-      ) {
-        setMovieInfo(request.data);
-      } else {
         request = await axios.get(
           `/movie/${movie.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
         );
@@ -57,9 +58,8 @@ function MovieDescriptionPage() {
 
   return (
     <div className="moviePage">
-      <div className="movieHeader">
-        <Nav />
-      </div>
+      <Nav />
+
       <div className="movieContent">
         <div className="moviePoster">
           <img
@@ -139,6 +139,7 @@ function MovieDescriptionPage() {
               movieInfo={movieInfo}
             />
             <MovieDescriptionTrailer headerItem={chosenHeaderItem} />
+            <MovieDescriptionSimilar headerItem={chosenHeaderItem} />
           </div>
         </div>
       </div>

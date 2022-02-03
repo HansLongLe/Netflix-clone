@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MovieDescriptionPage from "./MovieDescriptionPage";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import BrowsePage from "./BrowsePage";
 
 const persistor = persistStore(store);
 
@@ -24,6 +25,7 @@ ReactDOM.render(
               path="/movies/:movieId"
               element={<MovieDescriptionPage />}
             />
+            <Route exact path="/browse" element={<BrowsePage />} />
           </Routes>
         </Router>
       </PersistGate>
