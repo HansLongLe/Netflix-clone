@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
-import Row from "./Row";
-import requests from "./requests";
-import Banner from "./Banner";
+import "./css/App.css";
+import Row from "../components/Row";
+import requests from "../requests";
+import Banner from "../shared/Banner";
 
 function App() {
   return (

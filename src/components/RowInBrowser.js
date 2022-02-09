@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "./axios";
-import "./Row.css";
+import axios from "../axios";
+import "./css/Row.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setTrailerUrl } from "./redux/trailerSlice";
+import { setTrailerUrl } from "../redux/trailerSlice";
 import movieTrailer from "movie-trailer";
-import { setMovie } from "./redux/movieSlice";
+import { setMovie } from "../redux/movieSlice";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 

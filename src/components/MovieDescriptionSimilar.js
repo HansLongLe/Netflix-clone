@@ -1,9 +1,9 @@
-import "./MovieDescriptionSimilar.css";
+import "./css/MovieDescriptionSimilar.css";
 import { useEffect, useState } from "react";
-import axios from "./axios";
+import axios from "../axios";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Link, useParams } from "react-router-dom";
-import { setMovie } from "./redux/movieSlice";
+import { setMovie } from "../redux/movieSlice";
 import { useDispatch } from "react-redux";
 
 function MovieDescriptionSimilar({ headerItem }) {

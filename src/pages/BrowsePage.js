@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import "./BrowsePage.css";
-import ChosenMoviesGenreView from "./ChosenMoviesGenreView";
-import ChosenTVGenreView from "./ChosenTVGenreView";
-import DefaultBrowseView from "./DefaultBrowseView";
-import Nav from "./Nav";
-import SearchByTextView from "./SearchedByTextView";
-import SortingPanel from "./SortingPanel";
+import "./css/BrowsePage.css";
+import ChosenMoviesGenreView from "../components/ChosenMoviesGenreView";
+import ChosenTVGenreView from "../components/ChosenTVGenreView";
+import DefaultBrowseView from "../components/DefaultBrowseView";
+import Nav from "../Nav";
+import SearchByTextView from "../components/SearchedByTextView";
+import SortingPanel from "../shared/SortingPanel";
 
 function BrowsePage() {
   const params = useParams();

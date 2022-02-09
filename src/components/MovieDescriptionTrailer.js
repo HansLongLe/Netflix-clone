@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import "./MovieDescriptionTrailer.css";
+import "./css/MovieDescriptionTrailer.css";
 import { useSelector } from "react-redux";
 
 function MovieDescriptionTrailer({ headerItem }) {

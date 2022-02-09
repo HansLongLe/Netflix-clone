@@ -1,12 +1,12 @@
 import React from "react";
-import "./MovieDescriptionPage.css";
+import "./css/MovieDescriptionPage.css";
 import { useSelector } from "react-redux";
-import axios from "./axios";
+import axios from "../axios";
 import { useEffect, useState } from "react";
-import MovieDescriptionOverview from "./MovieDescriptionOverview";
-import Nav from "./Nav";
-import MovieDescriptionTrailer from "./MovieDescriptionTrailer";
-import MovieDescriptionSimilar from "./MovieDescriptionSimilar";
+import MovieDescriptionOverview from "../components/MovieDescriptionOverview";
+import Nav from "../Nav";
+import MovieDescriptionTrailer from "../components/MovieDescriptionTrailer";
+import MovieDescriptionSimilar from "../components/MovieDescriptionSimilar";
 import { useParams } from "react-router-dom";
 
 function MovieDescriptionPage() {

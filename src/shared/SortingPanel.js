@@ -1,6 +1,6 @@
-import axios from "./axios";
+import axios from "../axios";
 import { useEffect, useState } from "react";
-import "./SortingPanel.css";
+import "./css/SortingPanel.css";
 import { Link } from "react-router-dom";
 
 function SortingPanel() {

@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MovieDescriptionPage from "./MovieDescriptionPage";
+import MovieDescriptionPage from "./pages/MovieDescriptionPage";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import BrowsePage from "./BrowsePage";
+import BrowsePage from "./pages/BrowsePage";
 
 const persistor = persistStore(store);
 

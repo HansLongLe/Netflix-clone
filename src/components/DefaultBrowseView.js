@@ -1,6 +1,6 @@
-import "./DefaultBrowseView.css";
+import "./css/DefaultBrowseView.css";
 import RowInBrowser from "./RowInBrowser";
-import requests from "./requests";
+import requests from "../requests";
 
 function DefaultBrowseView() {
   return (

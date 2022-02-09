@@ -1,5 +1,5 @@
 import React from "react";
-import "./MovieDescriptionOverview.css";
+import "./css/MovieDescriptionOverview.css";
 
 function MovieDescriptionOverview({ headerItem, movieInfo }) {
   return (

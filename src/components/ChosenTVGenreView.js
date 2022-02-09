@@ -1,8 +1,8 @@
-import axios from "./axios";
+import axios from "../axios";
 import { useEffect, useState } from "react";
-import "./SortingByView.css";
+import "./css/SortingByView.css";
 import { useDispatch } from "react-redux";
-import { setMovie } from "./redux/movieSlice";
+import { setMovie } from "../redux/movieSlice";
 import { Link } from "react-router-dom";
 
 function ChosenTVGenreView({ genreId }) {

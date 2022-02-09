@@ -1,15 +1,15 @@
-import axios from "./axios";
+import axios from "../axios";
 import React, { useEffect } from "react";
-import requests from "./requests";
-import "./Banner.css";
+import requests from "../requests";
+import "./css/Banner.css";
 import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
-import { setMovie } from "./redux/movieSlice";
-import { setTrailerUrl } from "./redux/trailerSlice";
+import { setMovie } from "../redux/movieSlice";
+import { setTrailerUrl } from "../redux/trailerSlice";
 import { TiThList } from "react-icons/ti";
 import { IoAdd } from "react-icons/io5";
 import { Outlet, Link } from "react-router-dom";
-import Nav from "./Nav";
+import Nav from "../Nav";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
