@@ -1,4 +1,6 @@
-const API_KEY = process.env.REACT_APP_MY_API_KEY;
+const functions = require("firebase-functions");
+const config = functions.config();
+const API_KEY = config.deployment.api_key;
 
 const requests = {
   fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
