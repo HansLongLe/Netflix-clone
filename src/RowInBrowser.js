@@ -80,7 +80,7 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
             <SwiperSlide>
               <Link
                 style={{ color: "white", textDecoration: "none" }}
-                to={{ pathname: `/movies/${tempMovie.id}` }}
+                to={{ pathname: `/description/${tempMovie.id}` }}
               >
                 <img
                   key={tempMovie.id}

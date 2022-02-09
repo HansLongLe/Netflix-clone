@@ -63,7 +63,6 @@
 }
 .searchIcon {
   margin-left: 15%;
-  margin-right: 5%;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -78,9 +77,8 @@
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: hidden;
-  /* border: rgb(112, 112, 112) solid 2px;
-  border-radius: 5px; */
   width: 30%;
+  margin-left: 5%;
 }
 .searchBox:focus {
   outline: none;

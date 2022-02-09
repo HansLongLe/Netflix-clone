@@ -2,38 +2,38 @@ import "./MovieDescriptionSimilar.css";
 import { useEffect, useState } from "react";
 import axios from "./axios";
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { setMovie } from "./redux/movieSlice";
+import { useDispatch } from "react-redux";
 
 function MovieDescriptionSimilar({ headerItem }) {
   const base_url = "https://image.tmdb.org/t/p/original";
   const [similarMovies, setSimilarMovies] = useState([]);
-  const { movie } = useSelector((state) => state.movie);
   const dispatch = useDispatch();
+  const params = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
         var request = await axios.get(
-          `/movie/${movie.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
+          `/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
         );
         if (request.data.total_results === 0) {
           request = await axios.get(
-            `/tv/${movie.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
+            `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
           );
         }
         setSimilarMovies(request.data);
       } catch (err) {
         request = await axios.get(
-          `/tv/${movie.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
+          `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
         );
         setSimilarMovies(request.data);
       }
       return request;
     }
     fetchData();
-  }, [movie]);
+  }, []);
 
   function handleClick(similarMovie) {
     dispatch(setMovie(similarMovie));
@@ -71,7 +71,7 @@ function MovieDescriptionSimilar({ headerItem }) {
                   {similarMovie.backdrop_path !== null ? (
                     <SwiperSlide>
                       <Link
-                        to={{ pathname: `/movies/${similarMovie.id}` }}
+                        to={{ pathname: `/description/${similarMovie.id}` }}
                         style={{ color: "white", textDecoration: "none" }}
                       >
                         <img

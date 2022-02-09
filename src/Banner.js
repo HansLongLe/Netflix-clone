@@ -77,7 +77,7 @@ function Banner() {
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to={{
-                pathname: `/movies/${movie.id}`,
+                pathname: `/description/${movie.id}`,
               }}
             >
               <div className="overviewButton">

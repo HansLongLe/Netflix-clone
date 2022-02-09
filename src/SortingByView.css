@@ -1,4 +1,4 @@
-.moviesGenreView {
+.contentView {
   position: relative;
   margin-left: 2%;
   margin-right: 2%;
@@ -6,7 +6,7 @@
   width: 90%;
   height: 87%;
 }
-.movieGenreContainer {
+.container {
   width: 13%;
   height: 35%;
   position: relative;
@@ -29,7 +29,7 @@
   opacity: 0.2;
   transform: scale(1.1);
 }
-.genreMovieName {
+.contentName {
   font-size: 100%;
   opacity: 0;
   color: rgb(255, 255, 255);
@@ -42,6 +42,6 @@
   transform: translate(-50%, -50%);
 }
 
-.posterImage:hover ~ .genreMovieName {
+.posterImage:hover ~ .contentName {
   opacity: 1;
 }

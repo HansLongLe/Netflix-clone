@@ -22,12 +22,12 @@ ReactDOM.render(
             <Route exact path="/" element={<App />} />
             <Route
               exact
-              path="/movies/:movieId"
+              path="/description/:id"
               element={<MovieDescriptionPage />}
             />
             <Route
               exact
-              path="/browse/:type/:genreId"
+              path="/browse/:type/:sortBy"
               element={<BrowsePage />}
             />
           </Routes>

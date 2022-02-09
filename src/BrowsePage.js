@@ -4,6 +4,7 @@ import ChosenMoviesGenreView from "./ChosenMoviesGenreView";
 import ChosenTVGenreView from "./ChosenTVGenreView";
 import DefaultBrowseView from "./DefaultBrowseView";
 import Nav from "./Nav";
+import SearchByTextView from "./SearchedByTextView";
 import SortingPanel from "./SortingPanel";
 
 function BrowsePage() {
@@ -14,12 +15,14 @@ function BrowsePage() {
       <Nav />
       <div className="browseBody">
         <SortingPanel />
-        {params.genreId === "default" ? (
+        {params.type === "default" ? (
           <DefaultBrowseView />
         ) : params.type === "movies" ? (
           <ChosenMoviesGenreView genreId={params} />
-        ) : (
+        ) : params.type === "tv" ? (
           <ChosenTVGenreView genreId={params} />
+        ) : (
+          <SearchByTextView searchedText={params} />
         )}
       </div>
     </div>

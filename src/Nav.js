@@ -4,6 +4,15 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 function Nav() {
+  const [searchedText, setSearchText] = useState("");
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      window.location.href = `/browse/search/${searchedText}`;
+      console.log("hello");
+    }
+  }
+
   return (
     <div className="nav">
       <Link to={{ pathname: "/" }}>
@@ -17,8 +26,19 @@ function Nav() {
         <div className="browseDiv">Browse</div>
       </Link>
       <div className="searchDiv">
-        <AiOutlineSearch className="searchIcon" />
-        <input type={"text"} className="searchBox" placeholder="Search"></input>
+        <Link
+          to={{ pathname: `/browse/search/${searchedText}` }}
+          style={{ color: "rgb(112, 112, 112)" }}
+        >
+          <AiOutlineSearch className="searchIcon" />
+        </Link>
+        <input
+          onChange={(event) => setSearchText(event.target.value)}
+          onKeyDown={(event) => handleKeyDown(event)}
+          type={"text"}
+          className="searchBox"
+          placeholder="Search"
+        ></input>
       </div>
       <img
         className="nav_avatar"
