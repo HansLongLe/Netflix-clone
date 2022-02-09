@@ -1,0 +1,110 @@
+.row_posters {
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+  padding: 20px;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.row_poster {
+  object-fit: contain;
+  width: 100%;
+  max-height: 300px;
+  transition: all 450ms;
+  opacity: 0.5;
+  background-color: black;
+  cursor: pointer;
+  margin: 5%;
+}
+.row_posterLarge {
+  object-fit: contain;
+  width: 100%;
+  max-height: 350px;
+  transition: all 450ms;
+  opacity: 0.5;
+  background-color: black;
+  cursor: pointer;
+  margin: 5%;
+}
+
+.row_poster:hover,
+.row_posterLarge:hover {
+  transform: scale(1.1);
+  opacity: 1;
+  margin-top: 2%;
+}
+.row_title {
+  color: white;
+  margin-left: 1rem;
+}
+
+.chosenMovie {
+  transform: scale(1.1);
+  opacity: 1;
+  margin-top: 2%;
+}
+
+.swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23d5d3d3'%2F%3E%3C%2Fsvg%3E") !important;
+  transition: all 0.5s;
+}
+
+.swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23d5d3d3'%2F%3E%3C%2Fsvg%3E") !important;
+  transition: all 0.5s;
+}
+
+.swiper-button-prev:hover {
+  transform: scale(1.1);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E") !important;
+}
+
+.swiper-button-next:hover {
+  transform: scale(1.1);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E") !important;
+}
+.swiper-button-prev::after {
+  display: none;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+
+.movieName {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 5px #000000;
+  transition: opacity 450ms;
+}
+
+.row_poster_in_browser {
+  object-fit: contain;
+  width: 100%;
+  max-height: 300px;
+  transition: all 450ms;
+  opacity: 0.8;
+  background-color: black;
+  cursor: pointer;
+  margin: 5%;
+  position: relative;
+  z-index: 2;
+}
+
+.row_poster_in_browser:hover {
+  transform: scale(1.1);
+  opacity: 0.2;
+  margin-top: 2%;
+}
+
+.row_poster_in_browser:hover ~ .movieName {
+  opacity: 1;
+}

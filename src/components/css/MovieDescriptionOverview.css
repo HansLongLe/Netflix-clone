@@ -1,0 +1,46 @@
+.overview {
+  width: 80%;
+  color: rgb(214, 214, 214);
+}
+
+.lowerDescriptionBody {
+  display: flex;
+  margin-top: 10%;
+}
+
+.leftSideDescriptionBody {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.storyByTitle {
+  color: rgb(112, 112, 112);
+}
+
+.productionTitle {
+  margin-top: 10%;
+  color: rgb(112, 112, 112);
+}
+
+.movieGenresTitle {
+  margin-top: 10%;
+  color: rgb(112, 112, 112);
+}
+
+.rightSideDescriptionBody {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  color: rgb(214, 214, 214);
+}
+
+.productionInformation {
+  margin-top: 10%;
+}
+.movieGenresInformation {
+  margin-top: 10%;
+}
+.movieStatusTitle {
+  color: rgb(112, 112, 112);
+}
