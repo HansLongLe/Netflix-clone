@@ -25,7 +25,11 @@ ReactDOM.render(
               path="/movies/:movieId"
               element={<MovieDescriptionPage />}
             />
-            <Route exact path="/browse" element={<BrowsePage />} />
+            <Route
+              exact
+              path="/browse/:type/:genreId"
+              element={<BrowsePage />}
+            />
           </Routes>
         </Router>
       </PersistGate>

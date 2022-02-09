@@ -1,6 +1,7 @@
 import axios from "./axios";
 import { useEffect, useState } from "react";
 import "./SortingPanel.css";
+import { Link } from "react-router-dom";
 
 function SortingPanel() {
   const [movieGenres, setMovieGenres] = useState([]);
@@ -29,19 +30,29 @@ function SortingPanel() {
       {movieGenres === null || movieGenres.genres === undefined
         ? ""
         : movieGenres.genres.map((genre) => (
-            <div key={genre.id} className="movieGenreItem">
-              {genre.name}
-            </div>
+            <Link
+              to={{ pathname: `/browse/movies/${genre.id}` }}
+              style={{ textDecoration: "none" }}
+            >
+              <div key={genre.id} className="movieGenreItem">
+                {genre.name}
+              </div>
+            </Link>
           ))}
 
-      <h3 className="tvSortingTitle">TV</h3>
+      <h3 className="tvSortingTitle">TV Series</h3>
 
       {tvGenres === null || tvGenres.genres === undefined
         ? ""
         : tvGenres.genres.map((genre) => (
-            <div key={genre.id} className="tvGenreItem">
-              {genre.name}
-            </div>
+            <Link
+              to={{ pathname: `/browse/tv/${genre.id}` }}
+              style={{ textDecoration: "none" }}
+            >
+              <div key={genre.id} className="tvGenreItem">
+                {genre.name}
+              </div>
+            </Link>
           ))}
     </div>
   );

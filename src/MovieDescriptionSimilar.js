@@ -65,25 +65,33 @@ function MovieDescriptionSimilar({ headerItem }) {
               }}
               className="mySwiper"
             >
+              {console.log(similarMovies)}
               {similarMovies.results.map((similarMovie) => (
-                <SwiperSlide>
-                  <Link
-                    to={{ pathname: `/movies/${similarMovie.id}` }}
-                    style={{ color: "white", textDecoration: "none" }}
-                  >
-                    <img
-                      className="similarMovieImg"
-                      key={similarMovie.id}
-                      src={`${base_url}${similarMovie.backdrop_path}`}
-                      alt="similar movie"
-                      onClick={() => handleClick(similarMovie)}
-                    />
-                    <h3 className="similarMovieTitle">
-                      {similarMovie?.original_title ||
-                        similarMovie?.original_name}
-                    </h3>
-                  </Link>
-                </SwiperSlide>
+                <>
+                  {similarMovie.backdrop_path !== null ? (
+                    <SwiperSlide>
+                      <Link
+                        to={{ pathname: `/movies/${similarMovie.id}` }}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
+                        <img
+                          className="similarMovieImg"
+                          key={similarMovie.id}
+                          src={`${base_url}${similarMovie.backdrop_path}`}
+                          alt="similar movie"
+                          onClick={() => handleClick(similarMovie)}
+                        />
+                        <h3 className="similarMovieTitle">
+                          {similarMovie?.title ||
+                            similarMovie.name ||
+                            similarMovie?.original_name}
+                        </h3>
+                      </Link>
+                    </SwiperSlide>
+                  ) : (
+                    ""
+                  )}
+                </>
               ))}
             </Swiper>
           </div>

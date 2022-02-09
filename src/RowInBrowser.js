@@ -89,11 +89,11 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
                   src={`${base_url}${tempMovie.poster_path}`}
                   alt={tempMovie.name}
                 />
-                <h3 className="movieName">
+                <div className="movieName">
                   {tempMovie?.title ||
                     tempMovie?.name ||
                     tempMovie?.original_name}
-                </h3>
+                </div>
               </Link>
             </SwiperSlide>
           ))}

@@ -13,7 +13,7 @@ function Nav() {
           alt="Netflix logo"
         />
       </Link>
-      <Link to={{ pathname: "/browse" }}>
+      <Link to={{ pathname: `/browse/default/default` }}>
         <div className="browseDiv">Browse</div>
       </Link>
       <div className="searchDiv">

@@ -7,6 +7,7 @@ import MovieDescriptionOverview from "./MovieDescriptionOverview";
 import Nav from "./Nav";
 import MovieDescriptionTrailer from "./MovieDescriptionTrailer";
 import MovieDescriptionSimilar from "./MovieDescriptionSimilar";
+import { useParams } from "react-router-dom";
 
 function MovieDescriptionPage() {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -14,6 +15,7 @@ function MovieDescriptionPage() {
   const { movie } = useSelector((state) => state.movie);
   const [movieInfo, setMovieInfo] = useState(null);
   const [chosenHeaderItem, setChosenHeaderItem] = useState(0);
+  const { movieId } = useParams();
 
   function truncateDate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) : str;
@@ -135,7 +137,6 @@ function MovieDescriptionPage() {
             </div>
             <MovieDescriptionOverview
               headerItem={chosenHeaderItem}
-              movie={movie}
               movieInfo={movieInfo}
             />
             <MovieDescriptionTrailer headerItem={chosenHeaderItem} />

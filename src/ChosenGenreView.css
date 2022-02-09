@@ -1,0 +1,47 @@
+.moviesGenreView {
+  position: relative;
+  margin-left: 2%;
+  margin-right: 2%;
+  overflow-y: scroll;
+  width: 90%;
+  height: 87%;
+}
+.movieGenreContainer {
+  width: 13%;
+  height: 35%;
+  position: relative;
+  margin-bottom: 1%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.posterImage {
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0.8;
+  transition: all 450ms;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.posterImage:hover {
+  opacity: 0.2;
+  transform: scale(1.1);
+}
+.genreMovieName {
+  font-size: 100%;
+  opacity: 0;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 5px #000000;
+  transition: opacity 450ms;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.posterImage:hover ~ .genreMovieName {
+  opacity: 1;
+}
