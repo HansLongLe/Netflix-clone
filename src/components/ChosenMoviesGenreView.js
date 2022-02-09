@@ -13,7 +13,7 @@ function ChosenMoviesGenreView({ genreId }) {
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(
-        `/discover/movie?api_key=${process.env.REACT_APP_MY_API_KEY}&with_genres=${genreId.sortBy}`
+        `/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&with_genres=${genreId.sortBy}`
       );
       setMovies(request.data.results);
       return request;

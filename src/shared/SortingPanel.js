@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 function SortingPanel() {
   const [movieGenres, setMovieGenres] = useState([]);
   const [tvGenres, setTVGenres] = useState([]);
-  const movieGenres_url = `/genre/movie/list?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`;
-  const tvGenres_url = `/genre/tv/list?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`;
+  const movieGenres_url = `/genre/movie/list?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
+  const tvGenres_url = `/genre/tv/list?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
 
   useEffect(() => {
     async function fetchMovieGenresData() {

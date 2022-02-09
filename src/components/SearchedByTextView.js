@@ -14,11 +14,11 @@ function SearchByTextView({ searchedText }) {
   useEffect(() => {
     async function fetchData() {
       const movieRequest = await axios.get(
-        `/search/movie?api_key=${process.env.REACT_APP_MY_API_KEY}&query=${searchedText.sortBy}`
+        `/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${searchedText.sortBy}`
       );
       setMovies(movieRequest.data.results);
       const tvRequest = await axios.get(
-        `/search/tv?api_key=${process.env.REACT_APP_MY_API_KEY}&query=${searchedText.sortBy}`
+        `/search/tv?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${searchedText.sortBy}`
       );
       setTvs(tvRequest.data.results);
       return movieRequest;

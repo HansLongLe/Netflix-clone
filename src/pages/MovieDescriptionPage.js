@@ -23,31 +23,34 @@ function MovieDescriptionPage() {
 
   useEffect(() => {
     async function fetchData() {
-      //The only problem here is that whenever the user will go back to the previous page
-      // when after selecting a similar tv or movie, there might be a different movie or tv,
-      // because of the state, as the state is not being setted when going back
       try {
         var request = await axios.get(
-          `/tv/${params.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
+          `/tv/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
         );
-        if (
-          !(
-            (request.data.original_title !== undefined &&
-              movie.original_title !== undefined &&
-              request.data.original_title === movie.original_title) ||
-            (request.data.original_name !== undefined &&
-              movie.original_name !== undefined &&
-              request.data.original_name === movie.original_name)
-          )
-        ) {
+        console.log(request.data.id);
+        console.log(params.id);
+
+        if (parseInt(request.data.id) !== parseInt(params.id)) {
           request = await axios.get(
-            `/movie/${params.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
+            `/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
           );
+        } else {
+          if (
+            !(
+              request.data?.title === movie.title ||
+              request.data?.name === movie.name ||
+              request.data?.original_name === movie.original_name
+            )
+          ) {
+            request = await axios.get(
+              `/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
+            );
+          }
         }
         setMovieInfo(request.data);
       } catch (err) {
         request = await axios.get(
-          `/movie/${params.id}?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US`
+          `/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
         );
         setMovieInfo(request.data);
       }
@@ -67,6 +70,10 @@ function MovieDescriptionPage() {
       {movieInfo !== null ? (
         <div className="movieContent">
           <div className="moviePoster">
+            {console.log(
+              parseInt(movieInfo.id) === parseInt(params.id) ||
+                typeof movieInfo.seasons === undefined
+            )}
             <img
               src={`${base_url}${movieInfo?.poster_path}`}
               alt="Movie poster"

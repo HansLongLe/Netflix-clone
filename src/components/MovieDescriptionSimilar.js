@@ -16,17 +16,17 @@ function MovieDescriptionSimilar({ headerItem }) {
     async function fetchData() {
       try {
         var request = await axios.get(
-          `/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
+          `/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
         );
         if (request.data.total_results === 0) {
           request = await axios.get(
-            `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
+            `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
           );
         }
         setSimilarMovies(request.data);
       } catch (err) {
         request = await axios.get(
-          `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_MY_API_KEY}&language=en-US&page=1`
+          `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
         );
         setSimilarMovies(request.data);
       }
