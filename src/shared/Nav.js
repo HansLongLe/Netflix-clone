@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./Nav.css";
+import React, { useState } from "react";
+import "./css/Nav.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 
 function Nav() {
   const [searchedText, setSearchText] = useState("");
@@ -40,11 +41,14 @@ function Nav() {
           placeholder="Search"
         ></input>
       </div>
-      <img
+      <Link to={{ pathname: "/sign" }} style={{ color: "white" }}>
+        <FaUserAlt className="nav_avatar notSignedIn" />
+      </Link>
+      {/* <img
         className="nav_avatar"
         src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
         alt="Netflix avatar"
-      />
+      /> */}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import "./css/BrowsePage.css";
 import ChosenMoviesGenreView from "../components/ChosenMoviesGenreView";
 import ChosenTVGenreView from "../components/ChosenTVGenreView";
 import DefaultBrowseView from "../components/DefaultBrowseView";
-import Nav from "../Nav";
+import Nav from "../shared/Nav";
 import SearchByTextView from "../components/SearchedByTextView";
 import SortingPanel from "../shared/SortingPanel";
 
