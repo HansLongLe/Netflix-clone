@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css/App.css";
 import Row from "../components/Row";
 import requests from "../requests";
 import Banner from "../shared/Banner";
+import Nav from "../shared/Nav";
 
 function App() {
+  const [isMainPage, setIsMainPage] = useState(true);
   return (
     <div className="App">
       <article className="rows">

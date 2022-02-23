@@ -6,6 +6,7 @@ import {
 import { composeWithDevTools } from "redux-devtools-extension";
 import movieReducer from "./movieSlice";
 import trailerReducer from "./trailerSlice";
+import currentUserReducer from "./currentUserSlice";
 import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
@@ -14,6 +15,7 @@ import thunk from "redux-thunk";
 const reducers = combineReducers({
   trailer: trailerReducer,
   movie: movieReducer,
+  currentUser: currentUserReducer,
 });
 
 const persistConfig = {

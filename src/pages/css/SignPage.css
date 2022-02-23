@@ -213,13 +213,13 @@
   transform: scale(1.01);
 }
 
-.signUp {
+.otherSignButton {
   color: rgb(172, 172, 172);
   cursor: pointer;
   text-decoration: underline;
   transition: color 0.2s;
 }
-.signUp:hover {
+.otherSignButton:hover {
   color: rgb(140, 140, 140);
 }
 
@@ -323,4 +323,32 @@
   color: red;
   margin-left: 7%;
   margin-bottom: -5%;
+}
+
+.googleButton {
+  cursor: pointer;
+  transform: translateY(300%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(252, 252, 252);
+  border-radius: 5%;
+  width: 35%;
+  height: 50%;
+  box-shadow: 5px 5px rgba(252, 252, 252, 0.1);
+  transition: all 0.3s;
+}
+.googleButton:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+.googleIcon {
+  max-width: 100%;
+  width: 15%;
+  height: auto;
+  margin-right: 10%;
+}
+.googleText {
+  color: rgb(155, 155, 155);
+  font-size: 80%;
 }

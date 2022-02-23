@@ -1,12 +1,19 @@
 import { useState } from "react";
 import "./css/SignPage.css";
 import { db } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { sendEmailVerification } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, googleProvider } from "../firebase";
 import EmailVerificationModal from "../components/EmailVerificationModal";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../redux/currentUserSlice";
 
 function SignPage() {
+  const dispatch = useDispatch();
   const [signUp, setSignUp] = useState(false);
   const [delayedSignUp, setDelayedSignUp] = useState(false);
   const [delayedSignUp2, setDelayedSignUp2] = useState(false);
@@ -99,6 +106,71 @@ function SignPage() {
     return isValid;
   }
 
+  async function handleSignInValidation() {
+    let errors = [];
+    let isValid = true;
+
+    if (typeof fields["email"] !== undefined) {
+      let lastAtPos = fields["email"].lastIndexOf("@");
+      let lastDotPos = fields["email"].lastIndexOf(".");
+      if (
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          fields["email"].indexOf("@@") === -1 &&
+          lastDotPos > 2 &&
+          fields["email"].length - lastDotPos > 2 &&
+          lastDotPos - lastAtPos !== 1
+        )
+      ) {
+        isValid = false;
+        errors["email"] = "Email is not valid";
+      }
+    }
+
+    if (!fields["email"]) {
+      isValid = false;
+      errors["email"] = "Cannot be empty";
+    }
+
+    if (!fields["password"]) {
+      isValid = false;
+      errors["password"] = "Cannot be empty";
+    }
+
+    setErrors(errors);
+    return isValid;
+  }
+
+  async function signInFunction() {
+    console.log(handleSignInValidation());
+
+    if (await handleSignInValidation()) {
+      try {
+        const userCredentials = await signInWithEmailAndPassword(
+          auth,
+          fields["email"],
+          fields["password"]
+        );
+        const usersRef = db.collection("users");
+        const snapshot = await usersRef.get();
+        let username = "";
+        snapshot.forEach((doc) => {
+          username = (userCredentials.user.uid, "=>", doc.data().username);
+        });
+        const currentUser = {
+          email: userCredentials.user.email,
+          username: username,
+          verified: userCredentials.user.emailVerified,
+        };
+        dispatch(setCurrentUser(currentUser));
+        window.location.href = "/";
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+
   async function signUpFunction() {
     if (await handleSignUpValidation()) {
       try {
@@ -120,6 +192,7 @@ function SignPage() {
       }
     }
   }
+
   function toggleModal() {
     setVisible(!visible);
   }
@@ -131,6 +204,22 @@ function SignPage() {
       [name]: value,
     }));
   };
+
+  function signUsingGoogle() {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const currentUser = {
+          email: result.user.email,
+          username: result.user.displayName,
+          verified: true,
+        };
+        dispatch(setCurrentUser(currentUser));
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <div className="signPage">
@@ -202,6 +291,7 @@ function SignPage() {
             placeholder="Password"
             onChange={(event) => handleChange(event)}
             name="password"
+            type={"password"}
           ></input>
           <span className="errorMessage">{errors["password"]}</span>
           {delayedSignUp2 ? (
@@ -211,6 +301,7 @@ function SignPage() {
                 placeholder="Repeat password"
                 onChange={(event) => handleChange(event)}
                 name="repeatPassword"
+                type={"password"}
               ></input>
               <span className="errorMessage">{errors["repeatPassword"]}</span>
             </>
@@ -223,16 +314,28 @@ function SignPage() {
                 <h2 className="signButton" onClick={() => signUpFunction()}>
                   Sign Up
                 </h2>
-                <p onClick={() => changeLayout()} className="signUp">
+                <p onClick={() => changeLayout()} className="otherSignButton">
                   Have an account?
                 </p>
               </>
             ) : (
               <>
-                <h2 className="signButton">Sign In</h2>
-                <p onClick={() => changeLayout()} className="signUp">
+                <h2 className="signButton" onClick={() => signInFunction()}>
+                  Sign In
+                </h2>
+                <p onClick={() => changeLayout()} className="otherSignButton">
                   Create account
                 </p>
+                <div className="googleButton" onClick={() => signUsingGoogle()}>
+                  <img
+                    src="https://freesvg.org/img/1534129544.png"
+                    alt="google icon"
+                    className="googleIcon"
+                  />
+                  <p className="googleText">
+                    <b>Sign in with Google</b>
+                  </p>
+                </div>
               </>
             )}
           </div>
