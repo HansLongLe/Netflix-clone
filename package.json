@@ -40,7 +40,7 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "node index.js",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "heroku-postbuild": "npm run build",
     "precommit": "pretty-quick --staged"
