@@ -25,7 +25,7 @@
   height: 100%;
   max-height: 100%;
   background-color: rgb(0, 0, 0);
-  z-index: 2;
+  z-index: 3;
   position: absolute;
 }
 .signInLeftSide {
@@ -64,7 +64,7 @@
   }
 }
 
-.defaultHelpDiv {
+.defaultHelpLeftDiv {
   display: none;
   width: 40%;
   height: 100%;
@@ -72,11 +72,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
-  mask-image: linear-gradient(to right, transparent, black, transparent);
-
-  mask-position: 0%;
 }
 
 .netflixLogo {
@@ -89,6 +86,8 @@
 
 .hiddenLeftSide {
   animation: wipeHideLeft 0.6s forwards;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+  mask-position: 0%;
 }
 @keyframes wipeHideLeft {
   0% {
@@ -143,7 +142,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   transform: translateX(66%);
 }
@@ -253,4 +252,75 @@
     transform: translateX(66%);
     width: 60%;
   }
+}
+
+.defaultHelpRightDiv {
+  display: none;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 3;
+  position: absolute;
+  transform: translateX(150%);
+}
+
+.netflixLogo {
+  width: 60%;
+  margin-bottom: 5%;
+}
+.netflixLogoImg {
+  width: 50%;
+}
+
+.hiddenRightSide {
+  animation: wipeHideRight 0.6s forwards;
+  mask-image: linear-gradient(to right, transparent, black, transparent);
+  mask-position: 0%;
+}
+@keyframes wipeHideRight {
+  0% {
+    mask-image: linear-gradient(to right, transparent, black, black);
+    mask-position: 0%;
+    opacity: 1;
+    transform: translateX(145%);
+  }
+
+  100% {
+    mask-size: 300%;
+    z-index: 1;
+    mask-position: 50%;
+    opacity: 0;
+    transform: translateX(150%);
+  }
+}
+
+.visibleRightSide {
+  opacity: 0;
+  animation: wipeShowRight 0.8s forwards;
+  animation-delay: 0.9s;
+}
+@keyframes wipeShowRight {
+  0% {
+    mask-image: linear-gradient(to right, transparent, black, transparent);
+    mask-size: 300%;
+    mask-position: 0%;
+    opacity: 0;
+  }
+
+  100% {
+    mask-image: linear-gradient(to right, transparent, black, transparent);
+    mask-size: 300%;
+    mask-position: 50%;
+    opacity: 1;
+    transform: translateX(145%);
+  }
+}
+.errorMessage {
+  margin-top: 1%;
+  color: red;
+  margin-left: 7%;
+  margin-bottom: -5%;
 }
