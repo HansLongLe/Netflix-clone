@@ -9,7 +9,7 @@ import { setTrailerUrl } from "../redux/trailerSlice";
 import { TiThList } from "react-icons/ti";
 import { IoAdd } from "react-icons/io5";
 import { Outlet, Link } from "react-router-dom";
-import Nav from "../Nav";
+import Nav from "./Nav";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 

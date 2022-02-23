@@ -1,0 +1,191 @@
+.nav {
+  top: 0;
+  width: 100%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  height: 10%;
+  z-index: 5;
+  position: relative;
+}
+
+.nav_logo {
+  position: fixed;
+  left: 1.5rem;
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.5s;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.nav_logo:hover {
+  transform: scale(1.05);
+}
+
+.nav_avatar {
+  position: fixed;
+  right: 1.5rem;
+  object-fit: contain;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.nav_avatar:hover {
+  transform: scale(1.2);
+}
+.notSignedIn {
+  transition: all 0.2s;
+  border-radius: 50%;
+  transform: scale(1.2);
+  padding: 0.1%;
+}
+
+.notSignedIn:hover {
+  border-radius: 50%;
+  transform: scale(1.5);
+  background-color: rgb(55, 55, 55);
+}
+
+.browseDiv {
+  position: fixed;
+  width: 5%;
+  height: 50px;
+  color: rgb(112, 112, 112);
+  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+.browseDiv:hover {
+  color: rgb(214, 214, 214);
+  transform: scale(1.1);
+}
+.searchDiv {
+  position: fixed;
+  width: 20%;
+  height: 50px;
+  color: rgb(112, 112, 112);
+  margin-left: 300px;
+  display: flex;
+  align-items: center;
+}
+.searchIcon {
+  margin-left: 15%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.searchIcon:hover {
+  color: rgb(214, 214, 214);
+  transform: scale(1.2);
+}
+.searchBox {
+  color: rgb(112, 112, 112);
+  background-color: transparent;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  width: 30%;
+  margin-left: 5%;
+}
+.searchBox:focus {
+  outline: none;
+  color: rgb(214, 214, 214);
+}
+
+.signedIn {
+  width: 2%;
+  z-index: 20;
+}
+.clicked {
+  transform: scale(1.2);
+}
+
+.menuForMainPage {
+  position: sticky;
+  z-index: 10;
+  width: 10%;
+  height: 400%;
+  left: 100%;
+  margin-right: -0.3%;
+  margin-top: -0.4%;
+  top: 4%;
+  display: flex;
+  border-radius: 5%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(16, 16, 16);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  opacity: 0;
+}
+
+.menu {
+  position: sticky;
+  z-index: 10;
+  width: 10%;
+  height: 200%;
+  left: 100%;
+  margin-top: -0.5%;
+  margin-right: -0.3%;
+  display: flex;
+  border-radius: 5%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(16, 16, 16);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  opacity: 0;
+}
+
+.menuShow {
+  animation: burgerAnimationShow 0.3s forwards;
+}
+
+@keyframes burgerAnimationShow {
+  100% {
+    transform: translateX(-10%);
+    opacity: 1;
+  }
+}
+.burgerItem {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  margin-bottom: 5%;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10%;
+  transition: all 0.3s;
+}
+.burgerItem:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+.username {
+  color: white;
+  margin-bottom: 30%;
+  margin-left: 30%;
+  font-size: 80%;
+  align-self: start;
+}
+
+.menuHide {
+  opacity: 1;
+  animation: burgerAnimationHide 0.3s forwards;
+}
+@keyframes burgerAnimationHide {
+  100% {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+}

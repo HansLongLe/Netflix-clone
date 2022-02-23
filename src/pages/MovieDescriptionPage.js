@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import MovieDescriptionOverview from "../components/MovieDescriptionOverview";
-import Nav from "../Nav";
+import Nav from "../shared/Nav";
 import MovieDescriptionTrailer from "../components/MovieDescriptionTrailer";
 import MovieDescriptionSimilar from "../components/MovieDescriptionSimilar";
 import { useParams } from "react-router-dom";

@@ -10,6 +10,7 @@ import MovieDescriptionPage from "./pages/MovieDescriptionPage";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import BrowsePage from "./pages/BrowsePage";
+import SignPage from "./pages/SignPage";
 
 const persistor = persistStore(store);
 
@@ -30,6 +31,7 @@ ReactDOM.render(
               path="/browse/:type/:sortBy"
               element={<BrowsePage />}
             />
+            <Route exact path="/sign" element={<SignPage />}></Route>
           </Routes>
         </Router>
       </PersistGate>

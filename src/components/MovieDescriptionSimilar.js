@@ -33,7 +33,7 @@ function MovieDescriptionSimilar({ headerItem }) {
       return request;
     }
     fetchData();
-  }, []);
+  }, [params.id]);
 
   function handleClick(similarMovie) {
     dispatch(setMovie(similarMovie));
