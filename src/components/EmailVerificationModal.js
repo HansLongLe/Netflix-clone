@@ -22,7 +22,7 @@ const EmailVerificationModal = ({ visible, toggle }) => {
                 follow the instrunctions written in the email to activate your
                 account.
               </p>
-              <Link to={{ pathname: "/" }} style={{ color: "white" }}>
+              <Link to={{ pathname: "/sign" }} style={{ color: "white" }}>
                 <button className="okButton" type="button" onClick={toggle}>
                   Ok
                 </button>

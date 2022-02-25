@@ -108,3 +108,33 @@
 .row_poster_in_browser:hover ~ .movieName {
   opacity: 1;
 }
+
+.loadingRow {
+  width: 100%;
+  height: 50%;
+  transform: translateY(50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.loadingRowInBrowser {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 1%;
+}
+
+.loadingMovie {
+  background-color: rgb(48, 48, 48);
+  width: 20%;
+  height: 100%;
+}
+
+.loadingMovieInBrowser {
+  background-color: rgb(48, 48, 48);
+  width: 12%;
+  height: 100%;
+}

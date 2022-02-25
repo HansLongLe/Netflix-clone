@@ -19,7 +19,6 @@ function Nav() {
   function handleKeyDown(event) {
     if (event.key === "Enter") {
       window.location.href = `/browse/search/${searchedText}`;
-      console.log("hello");
     }
   }
 
