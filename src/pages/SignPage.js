@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./css/SignPage.css";
 import { db } from "../firebase";
 import {
@@ -11,8 +11,10 @@ import { auth, googleProvider } from "../firebase";
 import EmailVerificationModal from "../components/EmailVerificationModal";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../redux/currentUserSlice";
+import LoadingPage from "./LoadingPage";
 
 function SignPage() {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [signUp, setSignUp] = useState(false);
   const [delayedSignUp, setDelayedSignUp] = useState(false);
@@ -28,15 +30,33 @@ function SignPage() {
   });
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+
   function changeLayout() {
     setSignUp(!signUp);
     setDefaultSign(false);
     setTimeout(() => {
       setDelayedSignUp(!delayedSignUp);
-    }, 500);
+    }, 630);
     setTimeout(() => {
       setDelayedSignUp2(!delayedSignUp2);
     }, 640);
+  }
+
+  function handleKeyDownSignUp(event) {
+    if (event.key === "Enter") {
+      signUpFunction();
+    }
+  }
+
+  function handleKeyDownSignIn(event) {
+    if (event.key === "Enter") {
+      signInFunction();
+    }
   }
 
   async function handleSignUpValidation() {
@@ -87,7 +107,7 @@ function SignPage() {
       errors["email"] = "Cannot be empty";
     }
 
-    if (!fields["password"] < 6) {
+    if (fields["password"] < 6) {
       isValid = false;
       errors["password"] = "Password should be at least 6 characters long";
     }
@@ -188,7 +208,9 @@ function SignPage() {
         });
         setVisible(!visible);
       } catch (error) {
-        console.log(error.message);
+        let tempErrors = errors;
+        tempErrors["email"] = "Assigned to an existing account";
+        setErrors(tempErrors);
       }
     }
   }
@@ -222,152 +244,185 @@ function SignPage() {
   }
 
   return (
-    <div className="signPage">
-      <EmailVerificationModal visible={visible} toggle={toggleModal} />
-      <div
-        className={
-          defaultSign
-            ? "defaultLeftSide"
-            : signUp
-            ? "defaultLeftSide signUpRightSide"
-            : "defaultLeftSide signInLeftSide"
-        }
-      ></div>
-      <div
-        className={`defaultHelpLeftDiv  ${
-          defaultSign ? "" : signUp ? "hiddenLeftSide" : "visibleLeftSide"
-        }`}
-      >
-        <div className="netflixLogo">
-          <a href="https://www.netflix.com/" target={"_blank"} rel="noreferrer">
-            <img
-              className="netflixLogoImg"
-              src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
-              alt="Netflix logo"
-            />
-          </a>
-        </div>
-        <h1 className="netflixText">
-          WATCH TV SHOWS & MOVIES ANYWHERE AND ANYTIME.
-        </h1>
-      </div>
-      <div
-        className={
-          defaultSign
-            ? "defaultRightSide"
-            : signUp
-            ? "defaultRightSide signUpLeftSide"
-            : "defaultRightSide signInRightSide"
-        }
-      >
-        <div className="signContainer">
-          <img
-            className="netflixLogoSmallImg"
-            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
-            alt="Netflix logo"
-          />
-          <input
-            className="emailInput"
-            placeholder="Email"
-            onChange={(event) => handleChange(event)}
-            name="email"
-          ></input>
-          <span className="errorMessage">{errors["email"]}</span>
-          {delayedSignUp2 ? (
-            <>
-              <input
-                className="usernameInput"
-                placeholder="Username"
-                onChange={(event) => handleChange(event)}
-                name="username"
-              ></input>
-              <span className="errorMessage">{errors["username"]}</span>
-            </>
-          ) : (
-            ""
-          )}
-          <input
-            className="passwordInput"
-            placeholder="Password"
-            onChange={(event) => handleChange(event)}
-            name="password"
-            type={"password"}
-          ></input>
-          <span className="errorMessage">{errors["password"]}</span>
-          {delayedSignUp2 ? (
-            <>
-              <input
-                className="passwordInput"
-                placeholder="Repeat password"
-                onChange={(event) => handleChange(event)}
-                name="repeatPassword"
-                type={"password"}
-              ></input>
-              <span className="errorMessage">{errors["repeatPassword"]}</span>
-            </>
-          ) : (
-            ""
-          )}
-          <div className="signButtons">
-            {delayedSignUp ? (
-              <>
-                <h2 className="signButton" onClick={() => signUpFunction()}>
-                  Sign Up
-                </h2>
-                <p onClick={() => changeLayout()} className="otherSignButton">
-                  Have an account?
-                </p>
-              </>
-            ) : (
-              <>
-                <h2 className="signButton" onClick={() => signInFunction()}>
-                  Sign In
-                </h2>
-                <p onClick={() => changeLayout()} className="otherSignButton">
-                  Create account
-                </p>
-                <div className="googleButton" onClick={() => signUsingGoogle()}>
-                  <img
-                    src="https://freesvg.org/img/1534129544.png"
-                    alt="google icon"
-                    className="googleIcon"
-                  />
-                  <p className="googleText">
-                    <b>Sign in with Google</b>
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-      {defaultSign ? (
-        ""
+    <>
+      {loading ? (
+        <LoadingPage />
       ) : (
-        <div
-          className={`defaultHelpRightDiv  ${
-            signUp ? "visibleRightSide" : "hiddenRightSide"
-          }`}
-        >
-          <div className="netflixLogo">
-            <a
-              href="https://www.netflix.com/"
-              target={"_blank"}
-              rel="noreferrer"
-            >
+        <div className="signPage">
+          <EmailVerificationModal visible={visible} toggle={toggleModal} />
+          <div
+            className={
+              defaultSign
+                ? "defaultLeftSide"
+                : signUp
+                ? "defaultLeftSide signUpRightSide"
+                : "defaultLeftSide signInLeftSide"
+            }
+          ></div>
+          <div
+            className={`defaultHelpLeftDiv  ${
+              defaultSign ? "" : signUp ? "hiddenLeftSide" : "visibleLeftSide"
+            }`}
+          >
+            <div className="netflixLogo">
+              <a
+                href="https://www.netflix.com/"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <img
+                  className="netflixLogoImg"
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+                  alt="Netflix logo"
+                />
+              </a>
+            </div>
+            <h1 className="netflixText">
+              WATCH TV SHOWS & MOVIES ANYWHERE AND ANYTIME.
+            </h1>
+          </div>
+          <div
+            className={
+              defaultSign
+                ? "defaultRightSide"
+                : signUp
+                ? "defaultRightSide signUpLeftSide"
+                : "defaultRightSide signInRightSide"
+            }
+          >
+            <div className="signContainer">
               <img
-                className="netflixLogoImg"
+                className="netflixLogoSmallImg"
                 src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
                 alt="Netflix logo"
               />
-            </a>
+              <input
+                className="emailInput"
+                placeholder="Email"
+                onChange={(event) => handleChange(event)}
+                onKeyDown={(event) => {
+                  delayedSignUp2
+                    ? handleKeyDownSignUp(event)
+                    : handleKeyDownSignIn(event);
+                }}
+                name="email"
+              ></input>
+              <span className="errorMessage">{errors["email"]}</span>
+              {delayedSignUp2 ? (
+                <>
+                  <input
+                    className="usernameInput"
+                    placeholder="Username"
+                    onChange={(event) => handleChange(event)}
+                    onKeyDown={(event) => handleKeyDownSignUp(event)}
+                    name="username"
+                  ></input>
+                  <span className="errorMessage">{errors["username"]}</span>
+                </>
+              ) : (
+                ""
+              )}
+              <input
+                className="passwordInput"
+                placeholder="Password"
+                onChange={(event) => handleChange(event)}
+                onKeyDown={(event) => {
+                  delayedSignUp2
+                    ? handleKeyDownSignUp(event)
+                    : handleKeyDownSignIn(event);
+                }}
+                name="password"
+                type={"password"}
+              ></input>
+              <span className="errorMessage">{errors["password"]}</span>
+              {delayedSignUp2 ? (
+                <>
+                  <input
+                    className="passwordInput"
+                    placeholder="Repeat password"
+                    onChange={(event) => handleChange(event)}
+                    onKeyDown={(event) => handleKeyDownSignUp(event)}
+                    name="repeatPassword"
+                    type={"password"}
+                  ></input>
+                  <span className="errorMessage">
+                    {errors["repeatPassword"]}
+                  </span>
+                </>
+              ) : (
+                ""
+              )}
+              <div className="signButtons">
+                {delayedSignUp ? (
+                  <>
+                    <h2 className="signButton" onClick={() => signUpFunction()}>
+                      Sign Up
+                    </h2>
+                    <p
+                      onClick={() => changeLayout()}
+                      className="otherSignButton"
+                    >
+                      Have an account?
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="signButton" onClick={() => signInFunction()}>
+                      Sign In
+                    </h2>
+                    <p
+                      onClick={() => changeLayout()}
+                      className="otherSignButton"
+                    >
+                      Create account
+                    </p>
+                    <div
+                      className="googleButton"
+                      onClick={() => signUsingGoogle()}
+                    >
+                      <img
+                        src="https://freesvg.org/img/1534129544.png"
+                        alt="google icon"
+                        className="googleIcon"
+                      />
+                      <p className="googleText">
+                        <b>Sign in with Google</b>
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          <h1 className="netflixText">
-            START NOW TO GET UNLIMITED MOVIES, TV SHOWS & MORE.
-          </h1>
+          {defaultSign ? (
+            ""
+          ) : (
+            <div
+              className={`defaultHelpRightDiv  ${
+                signUp ? "visibleRightSide" : "hiddenRightSide"
+              }`}
+            >
+              <div className="netflixLogo">
+                <a
+                  href="https://www.netflix.com/"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  <img
+                    className="netflixLogoImg"
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+                    alt="Netflix logo"
+                  />
+                </a>
+              </div>
+              <h1 className="netflixText">
+                START NOW TO GET UNLIMITED MOVIES, TV SHOWS & MORE.
+              </h1>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 function ChosenMoviesGenreView({ genreId }) {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,6 +17,7 @@ function ChosenMoviesGenreView({ genreId }) {
         `/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&with_genres=${genreId.sortBy}`
       );
       setMovies(request.data.results);
+      setLoading(false);
       return request;
     }
     fetchData();

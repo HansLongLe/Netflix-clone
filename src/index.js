@@ -5,12 +5,13 @@ import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MovieDescriptionPage from "./pages/MovieDescriptionPage";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import BrowsePage from "./pages/BrowsePage";
 import SignPage from "./pages/SignPage";
+import LoadingPage from "./pages/LoadingPage";
 
 const persistor = persistStore(store);
 
@@ -19,7 +20,7 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Router>
-          <Routes>
+          <Routes LoadingPage={<LoadingPage />}>
             <Route exact path="/" element={<App />} />
             <Route
               exact
