@@ -40,10 +40,11 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "heroku-postbuild": "npm run build",
-    "precommit": "pretty-quick --staged"
+    "precommit": "pretty-quick --staged",
+    "style:all": "npm run style:lint && npm run style:prettier"
   },
   "eslintConfig": {
     "extends": [
