@@ -55,9 +55,6 @@ function MovieDescriptionPage() {
         setMovieInfo(request.data);
       }
 
-      console.log(request.data);
-      console.log(movie);
-
       return request;
     }
 
