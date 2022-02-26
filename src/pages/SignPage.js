@@ -370,14 +370,8 @@ function SignPage() {
                     <h2 className="signButton" onClick={() => signInFunction()}>
                       Sign In
                     </h2>
-                    <p
-                      onClick={() => changeLayout()}
-                      className="otherSignButton"
-                    >
-                      Create account
-                    </p>
                     <div
-                      className="googleButton"
+                      className="signButton googleButton"
                       onClick={() => signUsingGoogle()}
                     >
                       <img
@@ -389,6 +383,12 @@ function SignPage() {
                         <b>Sign in with Google</b>
                       </p>
                     </div>
+                    <p
+                      onClick={() => changeLayout()}
+                      className="otherSignButton"
+                    >
+                      Create account
+                    </p>
                   </>
                 )}
               </div>
