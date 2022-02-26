@@ -1,4 +1,0 @@
-    production
-    "start": "serve -s build",
-    developmnent
-    "start": "react-scripts start",
