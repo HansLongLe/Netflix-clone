@@ -7,6 +7,7 @@ import movieTrailer from "movie-trailer";
 import { setMovie } from "../redux/movieSlice";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -33,14 +34,12 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (movie, trailerUrl) => {
-    dispatch(setMovie(movie));
-
-    if (trailerUrl) {
-      dispatch(setTrailerUrl(""));
-    } else {
-      movieTrailer(movie?.name || "")
-        .then((url) => {
+  const handleClick = (currentMovie) => {
+    movieTrailer(currentMovie?.name || "")
+      .then((url) => {
+        if (url === null) {
+          dispatch(setTrailerUrl(""));
+        } else {
           const urlParameters = new URLSearchParams(new URL(url).search);
           dispatch(
             setTrailerUrl([
@@ -48,18 +47,20 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
               `https://www.youtube.com/embed/${urlParameters.get("v")}`,
             ])
           );
-        })
-        .catch((error) => console.log(error));
-    }
+        }
+      })
+      .catch((error) => console.log(error));
+
+    dispatch(setMovie(currentMovie));
   };
 
   return (
     <>
+      <h2 className="row_title">{title}</h2>
       {loading ? (
         <LoadingRowInBrowser />
       ) : (
         <div className="row">
-          <h2 className="row_title">{title}</h2>
           <div className="row_posters">
             <Swiper
               slidesPerView={1}
@@ -88,13 +89,15 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
                     style={{ color: "white", textDecoration: "none" }}
                     to={{ pathname: `/description/${tempMovie.id}` }}
                   >
-                    <img
+                    <LazyLoadImage
                       key={tempMovie.id}
                       onClick={() => handleClick(tempMovie, trailerUrl)}
                       className="row_poster_in_browser"
                       src={`${base_url}${tempMovie.poster_path}`}
                       alt={tempMovie.name}
+                      loading="lazy"
                     />
+
                     <div className="movieName">
                       {tempMovie?.title ||
                         tempMovie?.name ||
@@ -105,7 +108,6 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
               ))}
             </Swiper>
           </div>
-          ) )
         </div>
       )}
     </>

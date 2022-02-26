@@ -67,7 +67,7 @@ function Nav() {
             src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
             alt="Netflix avatar"
           />
-          {console.log(Object.keys(params).length === 0)}
+
           {visible ? (
             <ul
               className={`${

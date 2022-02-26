@@ -14,23 +14,27 @@ function MovieDescriptionSimilar({ headerItem }) {
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        var request = await axios.get(
-          `/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
-        );
-        if (request.data.total_results === 0) {
+      let mounted = true;
+      if (mounted) {
+        try {
+          var request = await axios.get(
+            `/movie/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
+          );
+          if (request.data.total_results === 0) {
+            request = await axios.get(
+              `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
+            );
+          }
+          setSimilarMovies(request.data);
+        } catch (err) {
           request = await axios.get(
             `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
           );
+          setSimilarMovies(request.data);
         }
-        setSimilarMovies(request.data);
-      } catch (err) {
-        request = await axios.get(
-          `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
-        );
-        setSimilarMovies(request.data);
       }
-      return request;
+
+      return (mounted = false);
     }
     fetchData();
   }, [params.id]);
@@ -65,7 +69,6 @@ function MovieDescriptionSimilar({ headerItem }) {
               }}
               className="mySwiper"
             >
-              {console.log(similarMovies)}
               {similarMovies.results.map((similarMovie) => (
                 <>
                   {similarMovie.backdrop_path !== null ? (

@@ -3,11 +3,12 @@ import "./css/MovieDescriptionPage.css";
 import { useSelector } from "react-redux";
 import axios from "../axios";
 import { useEffect, useState } from "react";
-import MovieDescriptionOverview from "../components/MovieDescriptionOverview";
 import Nav from "../shared/Nav";
+import { useParams } from "react-router-dom";
+import MovieDescriptionOverview from "../components/MovieDescriptionOverview";
 import MovieDescriptionTrailer from "../components/MovieDescriptionTrailer";
 import MovieDescriptionSimilar from "../components/MovieDescriptionSimilar";
-import { useParams } from "react-router-dom";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function MovieDescriptionPage() {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -27,9 +28,6 @@ function MovieDescriptionPage() {
         var request = await axios.get(
           `/tv/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
         );
-        console.log(request.data.id);
-        console.log(params.id);
-
         if (parseInt(request.data.id) !== parseInt(params.id)) {
           request = await axios.get(
             `/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
@@ -67,10 +65,6 @@ function MovieDescriptionPage() {
       {movieInfo !== null ? (
         <div className="movieContent">
           <div className="moviePoster">
-            {console.log(
-              parseInt(movieInfo.id) === parseInt(params.id) ||
-                typeof movieInfo.seasons === undefined
-            )}
             <img
               src={`${base_url}${movieInfo?.poster_path}`}
               alt="Movie poster"
@@ -146,12 +140,18 @@ function MovieDescriptionPage() {
                   REVIEWS
                 </h2>
               </div>
-              <MovieDescriptionOverview
-                headerItem={chosenHeaderItem}
-                movieInfo={movieInfo}
-              />
-              <MovieDescriptionTrailer headerItem={chosenHeaderItem} />
-              <MovieDescriptionSimilar headerItem={chosenHeaderItem} />
+              <LazyLoadComponent>
+                <MovieDescriptionOverview
+                  headerItem={chosenHeaderItem}
+                  movieInfo={movieInfo}
+                />
+              </LazyLoadComponent>
+              <LazyLoadComponent>
+                <MovieDescriptionTrailer headerItem={chosenHeaderItem} />
+              </LazyLoadComponent>
+              <LazyLoadComponent>
+                <MovieDescriptionSimilar headerItem={chosenHeaderItem} />
+              </LazyLoadComponent>
             </div>
           </div>
         </div>

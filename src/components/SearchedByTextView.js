@@ -4,6 +4,8 @@ import "./css/SortingByView.css";
 import { useDispatch } from "react-redux";
 import { setMovie } from "../redux/movieSlice";
 import { Link } from "react-router-dom";
+import movieTrailer from "movie-trailer";
+import { setTrailerUrl } from "../redux/trailerSlice";
 
 function SearchByTextView({ searchedText }) {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -26,9 +28,25 @@ function SearchByTextView({ searchedText }) {
     fetchData();
   }, [searchedText]);
 
-  function handleClick(temp) {
-    dispatch(setMovie(temp));
-  }
+  const handleClick = (currentMovie) => {
+    movieTrailer(currentMovie?.name || "")
+      .then((url) => {
+        if (url === null) {
+          dispatch(setTrailerUrl(""));
+        } else {
+          const urlParameters = new URLSearchParams(new URL(url).search);
+          dispatch(
+            setTrailerUrl([
+              urlParameters.get("v"),
+              `https://www.youtube.com/embed/${urlParameters.get("v")}`,
+            ])
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+
+    dispatch(setMovie(currentMovie));
+  };
   return (
     <div className="contentView">
       {movies.map((tempMovie) => (
