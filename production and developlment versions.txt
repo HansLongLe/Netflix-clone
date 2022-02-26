@@ -2,3 +2,5 @@
     "start": "serve -s build",
     developmnent
     "start": "react-scripts start",
+
+    for starting developmnent type start run dev
