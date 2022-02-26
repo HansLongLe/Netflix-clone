@@ -2,8 +2,9 @@ import axios from "../axios";
 import { useEffect, useState } from "react";
 import "./css/SortingByView.css";
 import { useDispatch } from "react-redux";
-import { setMovie } from "../redux/movieSlice";
 import { Link } from "react-router-dom";
+import { setTrailerUrl } from "../redux/trailerSlice";
+import movieTrailer from "movie-trailer";
 
 function ChosenTVGenreView({ genreId }) {
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -21,9 +22,25 @@ function ChosenTVGenreView({ genreId }) {
     fetchData();
   }, [genreId]);
 
-  function handleClick(tempTvs) {
-    dispatch(setMovie(tempTvs));
-  }
+  const handleClick = (currentTv) => {
+    movieTrailer(currentTv?.name || "")
+      .then((url) => {
+        if (url === null) {
+          dispatch(setTrailerUrl(""));
+        } else {
+          const urlParameters = new URLSearchParams(new URL(url).search);
+          dispatch(
+            setTrailerUrl([
+              urlParameters.get("v"),
+              `https://www.youtube.com/embed/${urlParameters.get("v")}`,
+            ])
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+
+    dispatch(setTvs(currentTv));
+  };
   return (
     <div className="contentView">
       {tvs.map((tempTvs) => (

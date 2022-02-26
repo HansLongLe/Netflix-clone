@@ -163,8 +163,6 @@ function SignPage() {
   }
 
   async function signInFunction() {
-    console.log(handleSignInValidation());
-
     if (await handleSignInValidation()) {
       try {
         const userCredentials = await signInWithEmailAndPassword(

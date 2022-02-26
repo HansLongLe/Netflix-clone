@@ -6,6 +6,7 @@ import DefaultBrowseView from "../components/DefaultBrowseView";
 import Nav from "../shared/Nav";
 import SearchByTextView from "../components/SearchedByTextView";
 import SortingPanel from "../shared/SortingPanel";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function BrowsePage() {
   const params = useParams();
@@ -16,13 +17,21 @@ function BrowsePage() {
       <div className="browseBody">
         <SortingPanel />
         {params.type === "default" ? (
-          <DefaultBrowseView />
+          <LazyLoadComponent>
+            <DefaultBrowseView />
+          </LazyLoadComponent>
         ) : params.type === "movies" ? (
-          <ChosenMoviesGenreView genreId={params} />
+          <LazyLoadComponent>
+            <ChosenMoviesGenreView genreId={params} />
+          </LazyLoadComponent>
         ) : params.type === "tv" ? (
-          <ChosenTVGenreView genreId={params} />
+          <LazyLoadComponent>
+            <ChosenTVGenreView genreId={params} />
+          </LazyLoadComponent>
         ) : (
-          <SearchByTextView searchedText={params} />
+          <LazyLoadComponent>
+            <SearchByTextView searchedText={params} />
+          </LazyLoadComponent>
         )}
       </div>
     </div>

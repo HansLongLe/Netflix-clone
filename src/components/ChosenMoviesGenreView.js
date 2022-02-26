@@ -4,11 +4,13 @@ import "./css/SortingByView.css";
 import { useDispatch } from "react-redux";
 import { setMovie } from "../redux/movieSlice";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import movieTrailer from "movie-trailer";
+import { setTrailerUrl } from "../redux/trailerSlice";
 
 function ChosenMoviesGenreView({ genreId }) {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,21 +19,36 @@ function ChosenMoviesGenreView({ genreId }) {
         `/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&with_genres=${genreId.sortBy}`
       );
       setMovies(request.data.results);
-      setLoading(false);
       return request;
     }
     fetchData();
   }, [genreId]);
 
-  function handleClick(tempMovie) {
-    dispatch(setMovie(tempMovie));
-  }
+  const handleClick = (currentMovie) => {
+    movieTrailer(currentMovie?.name || "")
+      .then((url) => {
+        if (url === null) {
+          dispatch(setTrailerUrl(""));
+        } else {
+          const urlParameters = new URLSearchParams(new URL(url).search);
+          dispatch(
+            setTrailerUrl([
+              urlParameters.get("v"),
+              `https://www.youtube.com/embed/${urlParameters.get("v")}`,
+            ])
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+
+    dispatch(setMovie(currentMovie));
+  };
   return (
     <div className="contentView">
       {movies.map((tempMovie) => (
         <Link to={{ pathname: `/description/${tempMovie.id}` }}>
           <div className="container">
-            <img
+            <LazyLoadImage
               key={tempMovie.id}
               onClick={() => handleClick(tempMovie)}
               className={"posterImage"}

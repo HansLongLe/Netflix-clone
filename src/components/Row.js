@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import LoadingRow from "../loadingComponents/LoadingRow";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -33,14 +34,12 @@ function Row({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (movie, trailerUrl) => {
-    dispatch(setMovie(movie));
-
-    if (trailerUrl) {
-      dispatch(setTrailerUrl(""));
-    } else {
-      movieTrailer(movie?.name || "")
-        .then((url) => {
+  const handleClick = (currentMovie) => {
+    movieTrailer(currentMovie?.name || "")
+      .then((url) => {
+        if (url === null) {
+          dispatch(setTrailerUrl(""));
+        } else {
           const urlParameters = new URLSearchParams(new URL(url).search);
           dispatch(
             setTrailerUrl([
@@ -48,9 +47,11 @@ function Row({ title, fetchUrl, isLargeRow }) {
               `https://www.youtube.com/embed/${urlParameters.get("v")}`,
             ])
           );
-        })
-        .catch((error) => console.log(error));
-    }
+        }
+      })
+      .catch((error) => console.log(error));
+
+    dispatch(setMovie(currentMovie));
   };
 
   return (
@@ -84,10 +85,11 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 className="mySwiper"
               >
                 {movies.map((tempMovie) => (
-                  <SwiperSlide>
-                    <img
+                  <SwiperSlide key={tempMovie.id}>
+                    <LazyLoadImage
+                      loading="lazy"
                       key={tempMovie.id}
-                      onClick={() => handleClick(tempMovie, trailerUrl)}
+                      onClick={() => handleClick(tempMovie)}
                       className={`${
                         isLargeRow ? "row_posterLarge " : "row_poster "
                       } ${tempMovie.id === movie.id ? "chosenMovie" : ""}`}
@@ -123,7 +125,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
               >
                 {movies.map((tempMovie) => (
                   <SwiperSlide>
-                    <img
+                    <LazyLoadImage
+                      loading="lazy"
                       key={tempMovie.id}
                       onClick={() => handleClick(tempMovie, trailerUrl)}
                       className={`${

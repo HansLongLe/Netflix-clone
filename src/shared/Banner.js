@@ -68,7 +68,6 @@ function Banner() {
             <h1 className="release_date">
               {truncateDate(movie.first_air_date, 5)}
             </h1>
-            {console.log(movie)}
           </div>
           <h1 className="banner_decription">
             {truncate(movie?.overview, 200)}

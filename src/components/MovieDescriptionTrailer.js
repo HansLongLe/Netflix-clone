@@ -11,7 +11,6 @@ function MovieDescriptionTrailer({ headerItem }) {
           <p className="noTrailer">No trailer found</p>
         ) : (
           <div className="trailerAndmoreDiv">
-            {console.log(trailerUrl[1])}
             <ReactPlayer
               repeat
               className="react-player"
