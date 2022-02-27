@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import "./css/SortingByView.css";
@@ -8,7 +9,11 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import movieTrailer from "movie-trailer";
 import { setTrailerUrl } from "../redux/trailerSlice";
 
-function ChosenMoviesGenreView({ genreId }) {
+type Props = {
+  genreId: any;
+};
+
+function ChosenMoviesGenreView({ genreId }: Props) {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
@@ -24,9 +29,9 @@ function ChosenMoviesGenreView({ genreId }) {
     fetchData();
   }, [genreId]);
 
-  const handleClick = (currentMovie) => {
+  const handleClick = (currentMovie: any) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url) => {
+      .then((url: any) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -39,13 +44,13 @@ function ChosenMoviesGenreView({ genreId }) {
           );
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error: any) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
   return (
     <div className="contentView">
-      {movies.map((tempMovie) => (
+      {movies.map((tempMovie: any) => (
         <Link to={{ pathname: `/description/${tempMovie.id}` }}>
           <div className="container">
             <LazyLoadImage

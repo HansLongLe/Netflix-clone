@@ -14,8 +14,8 @@ import Nav from "./Nav";
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Banner() {
-  const { movie } = useSelector((state) => state.movie);
-  const { trailerUrl } = useSelector((state) => state.trailer);
+  const { movie } = useSelector((state: any) => state.movie);
+  const { trailerUrl } = useSelector((state: any) => state.trailer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,12 +34,12 @@ function Banner() {
     fetchData();
   }, [dispatch]);
 
-  function truncate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  function truncate(str: string, n: number) {
+    return str?.length > n ? str.substring(0, n - 1) + "..." : str;
   }
 
-  function truncateDate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) : str;
+  function truncateDate(str: string, n: number) {
+    return str?.length > n ? str.substring(0, n - 1) : str;
   }
 
   return (
@@ -50,7 +50,7 @@ function Banner() {
         backgroundImage: `url(${base_url}${movie?.backdrop_path})`,
       }}
     >
-      <Nav style={{ zIndex: "99" }} />
+      <Nav />
       <div className="black_cover"></div>
       <div className="banner_divider">
         <div className="banner_content">
@@ -61,9 +61,11 @@ function Banner() {
             <h1 className="rating">{movie.vote_average / 2}</h1>
             <div
               className="stars"
-              style={{
-                "--rating": movie.vote_average / 2,
-              }}
+              style={
+                {
+                  // "--rating": movie.vote_average / 2,
+                }
+              }
             ></div>
             <h1 className="release_date">
               {truncateDate(movie.first_air_date, 5)}

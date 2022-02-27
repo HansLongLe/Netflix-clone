@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import "./css/Row.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setTrailerUrl } from "../redux/trailerSlice";
 import movieTrailer from "movie-trailer";
 import { setMovie } from "../redux/movieSlice";
@@ -16,10 +16,14 @@ import LoadingRowInBrowser from "../loadingComponents/LoadingRowInBrowser";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function RowInBrowser({ title, fetchUrl, isLargeRow }) {
+type Props = {
+  title: string;
+  fetchUrl: string;
+};
+
+function RowInBrowser({ title, fetchUrl }: Props) {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const { trailerUrl } = useSelector((state) => state.trailer);
   const dispatch = useDispatch();
 
   SwiperCore.use([Navigation]);
@@ -34,9 +38,9 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (currentMovie) => {
+  const handleClick = (currentMovie: any) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url) => {
+      .then((url: any) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -49,7 +53,7 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
           );
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error: any) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
@@ -83,7 +87,7 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
               }}
               className="mySwiper"
             >
-              {movies.map((tempMovie) => (
+              {movies.map((tempMovie: any) => (
                 <SwiperSlide>
                   <Link
                     style={{ color: "white", textDecoration: "none" }}
@@ -91,7 +95,7 @@ function RowInBrowser({ title, fetchUrl, isLargeRow }) {
                   >
                     <LazyLoadImage
                       key={tempMovie.id}
-                      onClick={() => handleClick(tempMovie, trailerUrl)}
+                      onClick={() => handleClick(tempMovie)}
                       className="row_poster_in_browser"
                       src={`${base_url}${tempMovie.poster_path}`}
                       alt={tempMovie.name}

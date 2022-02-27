@@ -1,3 +1,4 @@
+import React from "react";
 import "../components/css/Row.css";
 
 function LoadingRow() {

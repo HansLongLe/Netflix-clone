@@ -1,7 +1,12 @@
 import React from "react";
 import "./css/MovieDescriptionOverview.css";
 
-function MovieDescriptionOverview({ headerItem, movieInfo }) {
+type Props = {
+  headerItem: number;
+  movieInfo: any;
+};
+
+function MovieDescriptionOverview({ headerItem, movieInfo }: Props) {
   return (
     <div className="descriptionBody">
       {headerItem === 0 && movieInfo !== undefined ? (
@@ -29,7 +34,7 @@ function MovieDescriptionOverview({ headerItem, movieInfo }) {
             <div className="rightSideDescriptionBody">
               <p className="storyByInformation">
                 {movieInfo.hasOwnProperty("created_by")
-                  ? movieInfo.created_by.map((creator, i) =>
+                  ? movieInfo.created_by.map((creator: any, i: number) =>
                       i + 1 !== movieInfo.created_by.length
                         ? creator.name + ", "
                         : creator.name
@@ -38,15 +43,16 @@ function MovieDescriptionOverview({ headerItem, movieInfo }) {
               </p>
               <p className="productionInformation">
                 {movieInfo.hasOwnProperty("production_companies")
-                  ? movieInfo.production_companies.map((company, i) =>
-                      i + 1 !== movieInfo.production_companies.length
-                        ? company.name + ", "
-                        : company.name
+                  ? movieInfo.production_companies.map(
+                      (company: any, i: number) =>
+                        i + 1 !== movieInfo.production_companies.length
+                          ? company.name + ", "
+                          : company.name
                     )
                   : ""}
               </p>
               <p className="movieGenresInformation">
-                {movieInfo.genres.map((genre, i) =>
+                {movieInfo.genres.map((genre: any, i: number) =>
                   i + 1 !== movieInfo.genres.length
                     ? genre.name + ", "
                     : genre.name

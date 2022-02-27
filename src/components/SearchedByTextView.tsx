@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import "./css/SortingByView.css";
@@ -7,7 +8,11 @@ import { Link } from "react-router-dom";
 import movieTrailer from "movie-trailer";
 import { setTrailerUrl } from "../redux/trailerSlice";
 
-function SearchByTextView({ searchedText }) {
+type Props = {
+  searchedText: any;
+};
+
+function SearchByTextView({ searchedText }: Props) {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
   const [tvs, setTvs] = useState([]);
@@ -28,9 +33,9 @@ function SearchByTextView({ searchedText }) {
     fetchData();
   }, [searchedText]);
 
-  const handleClick = (currentMovie) => {
+  const handleClick = (currentMovie: any) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url) => {
+      .then((url: any) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -43,13 +48,13 @@ function SearchByTextView({ searchedText }) {
           );
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error: any) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
   return (
     <div className="contentView">
-      {movies.map((tempMovie) => (
+      {movies.map((tempMovie: any) => (
         <Link to={{ pathname: `/description/${tempMovie.id}` }}>
           {tempMovie.poster_path !== null ? (
             <div className="container">
@@ -71,7 +76,7 @@ function SearchByTextView({ searchedText }) {
           )}
         </Link>
       ))}
-      {tvs.map((tempTv) => (
+      {tvs.map((tempTv: any) => (
         <Link to={{ pathname: `/description/${tempTv.id}` }}>
           {tempTv.poster_path !== null ? (
             <div className="container">

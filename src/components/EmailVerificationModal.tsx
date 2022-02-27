@@ -1,8 +1,13 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import "./css/EmailVerificationModal.css";
 import { Link } from "react-router-dom";
 
-const EmailVerificationModal = ({ visible, toggle }) => {
+type Props = {
+  visible: boolean;
+  toggle: MouseEventHandler;
+};
+
+const EmailVerificationModal = ({ visible, toggle }: Props) => {
   return (
     <>
       {visible ? (

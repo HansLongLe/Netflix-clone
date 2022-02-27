@@ -10,13 +10,13 @@ import { HiViewList } from "react-icons/hi";
 
 function Nav() {
   const [searchedText, setSearchText] = useState("");
-  const { currentUser } = useSelector((state) => state.currentUser);
+  const { currentUser } = useSelector((state: any) => state.currentUser);
   const [visible, setVisible] = useState(false);
   const [defaultMenu, setDefaultMenu] = useState(true);
   const dispatch = useDispatch();
   const params = useParams();
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event: any) {
     if (event.key === "Enter") {
       window.location.href = `/browse/search/${searchedText}`;
     }

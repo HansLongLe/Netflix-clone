@@ -1,3 +1,4 @@
+import React from "react";
 import "./css/MovieDescriptionSimilar.css";
 import { useEffect, useState } from "react";
 import axios from "../axios";
@@ -6,9 +7,13 @@ import { Link, useParams } from "react-router-dom";
 import { setMovie } from "../redux/movieSlice";
 import { useDispatch } from "react-redux";
 
-function MovieDescriptionSimilar({ headerItem }) {
+type Props = {
+  headerItem: number;
+};
+
+function MovieDescriptionSimilar({ headerItem }: Props) {
   const base_url = "https://image.tmdb.org/t/p/original";
-  const [similarMovies, setSimilarMovies] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState<any>([]);
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -39,7 +44,7 @@ function MovieDescriptionSimilar({ headerItem }) {
     fetchData();
   }, [params.id]);
 
-  function handleClick(similarMovie) {
+  function handleClick(similarMovie: any) {
     dispatch(setMovie(similarMovie));
   }
 
@@ -69,7 +74,7 @@ function MovieDescriptionSimilar({ headerItem }) {
               }}
               className="mySwiper"
             >
-              {similarMovies.results.map((similarMovie) => (
+              {similarMovies.results.map((similarMovie: any) => (
                 <>
                   {similarMovie.backdrop_path !== null ? (
                     <SwiperSlide>

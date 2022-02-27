@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import "./css/SignPage.css";
 import { db } from "../firebase";
@@ -28,7 +29,7 @@ function SignPage() {
     password: "",
     repeatPassword: "",
   });
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,20 +48,20 @@ function SignPage() {
     }, 640);
   }
 
-  function handleKeyDownSignUp(event) {
+  function handleKeyDownSignUp(event: any) {
     if (event.key === "Enter") {
       signUpFunction();
     }
   }
 
-  function handleKeyDownSignIn(event) {
+  function handleKeyDownSignIn(event: any) {
     if (event.key === "Enter") {
       signInFunction();
     }
   }
 
   async function handleSignUpValidation() {
-    let errors = [];
+    let errors: { [key: string]: string } = {};
     let isValid = true;
 
     if (!fields["username"]) {
@@ -68,10 +69,12 @@ function SignPage() {
       errors["username"] = "Cannot be empty";
     }
 
-    if (db.collection("users").onSnapshot === fields["username"]) {
-      isValid = false;
-      errors["username"] = "Username already exists.";
-    }
+    (await db.collection("users").get()).forEach((doc) => {
+      if (doc.data().username === fields["username"]) {
+        isValid = false;
+        errors["username"] = "Username already exists.";
+      }
+    });
 
     const usersRef = db.collection("users");
     const snapshot = await usersRef.get();
@@ -107,7 +110,7 @@ function SignPage() {
       errors["email"] = "Cannot be empty";
     }
 
-    if (fields["password"] < 6) {
+    if (parseInt(fields["password"]) < 6) {
       isValid = false;
       errors["password"] = "Password should be at least 6 characters long";
     }
@@ -127,7 +130,7 @@ function SignPage() {
   }
 
   async function handleSignInValidation() {
-    let errors = [];
+    let errors: { [key: string]: string } = {};
     let isValid = true;
 
     if (typeof fields["email"] !== undefined) {
@@ -183,7 +186,7 @@ function SignPage() {
         };
         dispatch(setCurrentUser(currentUser));
         window.location.href = "/";
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.message);
       }
     }
@@ -201,7 +204,7 @@ function SignPage() {
           id: user.user.uid,
           username: fields["username"],
         });
-        sendEmailVerification(auth.currentUser).catch((error) => {
+        sendEmailVerification(auth.currentUser!).catch((error) => {
           console.log("Email verification error", error);
         });
         setVisible(!visible);
@@ -217,7 +220,7 @@ function SignPage() {
     setVisible(!visible);
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFields((prevState) => ({
       ...prevState,

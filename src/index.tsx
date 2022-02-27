@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./pages/App";
-import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -11,7 +10,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import BrowsePage from "./pages/BrowsePage";
 import SignPage from "./pages/SignPage";
-import LoadingPage from "./pages/LoadingPage";
 
 const persistor = persistStore(store);
 
@@ -20,19 +18,11 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Router>
-          <Routes LoadingPage={<LoadingPage />}>
-            <Route exact path="/" element={<App />} />
-            <Route
-              exact
-              path="/description/:id"
-              element={<MovieDescriptionPage />}
-            />
-            <Route
-              exact
-              path="/browse/:type/:sortBy"
-              element={<BrowsePage />}
-            />
-            <Route exact path="/sign" element={<SignPage />}></Route>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/description/:id" element={<MovieDescriptionPage />} />
+            <Route path="/browse/:type/:sortBy" element={<BrowsePage />} />
+            <Route path="/sign" element={<SignPage />}></Route>
           </Routes>
         </Router>
       </PersistGate>
@@ -44,4 +34,3 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
