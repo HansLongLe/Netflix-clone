@@ -13,13 +13,13 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 function MovieDescriptionPage() {
   const base_url = "https://image.tmdb.org/t/p/original/";
 
-  const { movie } = useSelector((state) => state.movie);
-  const [movieInfo, setMovieInfo] = useState(null);
+  const { movie } = useSelector((state: any) => state.movie);
+  const [movieInfo, setMovieInfo] = useState<any>(null);
   const [chosenHeaderItem, setChosenHeaderItem] = useState(0);
   const params = useParams();
 
-  function truncateDate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) : str;
+  function truncateDate(str: string, n: number) {
+    return str?.length > n ? str.substring(0, n - 1) : str;
   }
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function MovieDescriptionPage() {
         var request = await axios.get(
           `/tv/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
         );
-        if (parseInt(request.data.id) !== parseInt(params.id)) {
+        if (parseInt(request.data.id) !== parseInt(params.id!)) {
           request = await axios.get(
             `/movie/${params.id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
           );

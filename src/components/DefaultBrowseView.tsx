@@ -1,3 +1,4 @@
+import React from "react";
 import "./css/DefaultBrowseView.css";
 import RowInBrowser from "./RowInBrowser";
 import requests from "../requests";
@@ -8,8 +9,6 @@ function DefaultBrowseView() {
       <RowInBrowser
         title="NETFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginals}
-        isLargeRow
-        style={{}}
       />
 
       <RowInBrowser title="Trending Now" fetchUrl={requests.fetchTrending} />

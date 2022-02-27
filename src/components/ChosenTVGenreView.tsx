@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import "./css/SortingByView.css";
@@ -6,7 +7,11 @@ import { Link } from "react-router-dom";
 import { setTrailerUrl } from "../redux/trailerSlice";
 import movieTrailer from "movie-trailer";
 
-function ChosenTVGenreView({ genreId }) {
+type Props = {
+  genreId: any;
+};
+
+function ChosenTVGenreView({ genreId }: Props) {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [tvs, setTvs] = useState([]);
   const dispatch = useDispatch();
@@ -22,9 +27,9 @@ function ChosenTVGenreView({ genreId }) {
     fetchData();
   }, [genreId]);
 
-  const handleClick = (currentTv) => {
+  const handleClick = (currentTv: any) => {
     movieTrailer(currentTv?.name || "")
-      .then((url) => {
+      .then((url: any) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -37,13 +42,13 @@ function ChosenTVGenreView({ genreId }) {
           );
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error: any) => console.log(error));
 
     dispatch(setTvs(currentTv));
   };
   return (
     <div className="contentView">
-      {tvs.map((tempTvs) => (
+      {tvs.map((tempTvs: any) => (
         <Link to={{ pathname: `/description/${tempTvs.id}` }}>
           <div className="container">
             <img

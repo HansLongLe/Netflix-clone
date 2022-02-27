@@ -1,11 +1,12 @@
+import React from "react";
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import "./css/SortingPanel.css";
 import { Link } from "react-router-dom";
 
 function SortingPanel() {
-  const [movieGenres, setMovieGenres] = useState([]);
-  const [tvGenres, setTVGenres] = useState([]);
+  const [movieGenres, setMovieGenres] = useState<any>([]);
+  const [tvGenres, setTVGenres] = useState<any>([]);
   const movieGenres_url = `/genre/movie/list?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
   const tvGenres_url = `/genre/tv/list?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`;
 
@@ -29,7 +30,7 @@ function SortingPanel() {
       <h3 className="movieSortingTitle">Movies</h3>
       {movieGenres === null || movieGenres.genres === undefined
         ? ""
-        : movieGenres.genres.map((genre) => (
+        : movieGenres.genres.map((genre: any) => (
             <Link
               to={{ pathname: `/browse/movies/${genre.id}` }}
               style={{ textDecoration: "none" }}
@@ -44,7 +45,7 @@ function SortingPanel() {
 
       {tvGenres === null || tvGenres.genres === undefined
         ? ""
-        : tvGenres.genres.map((genre) => (
+        : tvGenres.genres.map((genre: any) => (
             <Link
               to={{ pathname: `/browse/tv/${genre.id}` }}
               style={{ textDecoration: "none" }}

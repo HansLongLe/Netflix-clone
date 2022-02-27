@@ -1,9 +1,14 @@
+import React from "react";
 import ReactPlayer from "react-player";
 import "./css/MovieDescriptionTrailer.css";
 import { useSelector } from "react-redux";
 
-function MovieDescriptionTrailer({ headerItem }) {
-  const { trailerUrl } = useSelector((state) => state.trailer);
+type Props = {
+  headerItem: number;
+};
+
+function MovieDescriptionTrailer({ headerItem }: Props) {
+  const { trailerUrl } = useSelector((state: any) => state.trailer);
   return (
     <>
       {headerItem === 1 ? (

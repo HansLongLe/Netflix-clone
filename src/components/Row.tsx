@@ -15,11 +15,16 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row({ title, fetchUrl, isLargeRow }) {
+type Props = {
+  title: string;
+  fetchUrl: string;
+  isLargeRow: boolean;
+};
+
+function Row({ title, fetchUrl, isLargeRow }: Props) {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const { trailerUrl } = useSelector((state) => state.trailer);
-  const { movie } = useSelector((state) => state.movie);
+  const { movie } = useSelector((state: any) => state.movie);
   const dispatch = useDispatch();
 
   SwiperCore.use([Navigation]);
@@ -34,9 +39,9 @@ function Row({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (currentMovie) => {
+  const handleClick = (currentMovie: any) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url) => {
+      .then((url: any) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -49,7 +54,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
           );
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error: any) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
@@ -84,7 +89,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 }}
                 className="mySwiper"
               >
-                {movies.map((tempMovie) => (
+                {movies.map((tempMovie: any) => (
                   <SwiperSlide key={tempMovie.id}>
                     <LazyLoadImage
                       loading="lazy"
@@ -123,12 +128,12 @@ function Row({ title, fetchUrl, isLargeRow }) {
                 }}
                 className="mySwiper"
               >
-                {movies.map((tempMovie) => (
+                {movies.map((tempMovie: any) => (
                   <SwiperSlide>
                     <LazyLoadImage
                       loading="lazy"
                       key={tempMovie.id}
-                      onClick={() => handleClick(tempMovie, trailerUrl)}
+                      onClick={() => handleClick(tempMovie)}
                       className={`${
                         isLargeRow ? "row_posterLarge " : "row_poster "
                       } ${tempMovie.id === movie.id ? "chosenMovie" : ""}`}
