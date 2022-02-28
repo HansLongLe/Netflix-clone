@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 import "./css/SortingByView.css";
 import { useDispatch } from "react-redux";
 import { setMovie } from "../redux/movieSlice";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import movieTrailer from "movie-trailer";
 import { setTrailerUrl } from "../redux/trailerSlice";
+import IMovie from "../types/IMovie";
+import ITv from "../types/ITv";
 
-type Props = {
-  searchedText: any;
-};
-
-function SearchByTextView({ searchedText }: Props) {
+function SearchByTextView() {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
   const [tvs, setTvs] = useState([]);
   const dispatch = useDispatch();
+
+  const searchedText = useParams<"sortBy">();
 
   useEffect(() => {
     async function fetchData() {
@@ -33,9 +33,9 @@ function SearchByTextView({ searchedText }: Props) {
     fetchData();
   }, [searchedText]);
 
-  const handleClick = (currentMovie: any) => {
+  const handleClick = (currentMovie: IMovie | ITv) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url: any) => {
+      .then((url: string) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -48,13 +48,13 @@ function SearchByTextView({ searchedText }: Props) {
           );
         }
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
   return (
     <div className="contentView">
-      {movies.map((tempMovie: any) => (
+      {movies.map((tempMovie: IMovie) => (
         <Link to={{ pathname: `/description/${tempMovie.id}` }}>
           {tempMovie.poster_path !== null ? (
             <div className="container">
@@ -76,7 +76,7 @@ function SearchByTextView({ searchedText }: Props) {
           )}
         </Link>
       ))}
-      {tvs.map((tempTv: any) => (
+      {tvs.map((tempTv: ITv) => (
         <Link to={{ pathname: `/description/${tempTv.id}` }}>
           {tempTv.poster_path !== null ? (
             <div className="container">

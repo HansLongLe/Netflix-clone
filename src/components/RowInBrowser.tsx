@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Link } from "react-router-dom";
 import LoadingRowInBrowser from "../loadingComponents/LoadingRowInBrowser";
+import IMovie from "../types/IMovie";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -38,9 +39,9 @@ function RowInBrowser({ title, fetchUrl }: Props) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (currentMovie: any) => {
+  const handleClick = (currentMovie: IMovie) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url: any) => {
+      .then((url: string) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -53,7 +54,7 @@ function RowInBrowser({ title, fetchUrl }: Props) {
           );
         }
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
@@ -87,7 +88,7 @@ function RowInBrowser({ title, fetchUrl }: Props) {
               }}
               className="mySwiper"
             >
-              {movies.map((tempMovie: any) => (
+              {movies.map((tempMovie: IMovie) => (
                 <SwiperSlide>
                   <Link
                     style={{ color: "white", textDecoration: "none" }}

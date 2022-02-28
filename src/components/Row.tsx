@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import "./css/Row.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { setTrailerUrl } from "../redux/trailerSlice";
 import movieTrailer from "movie-trailer";
 import { setMovie } from "../redux/movieSlice";
@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import LoadingRow from "../loadingComponents/LoadingRow";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import IMovie from "../types/IMovie";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -24,7 +25,7 @@ type Props = {
 function Row({ title, fetchUrl, isLargeRow }: Props) {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const { movie } = useSelector((state: any) => state.movie);
+  const { movie } = useSelector((state: RootStateOrAny) => state.movie);
   const dispatch = useDispatch();
 
   SwiperCore.use([Navigation]);
@@ -39,9 +40,9 @@ function Row({ title, fetchUrl, isLargeRow }: Props) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (currentMovie: any) => {
+  const handleClick = (currentMovie: IMovie) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url: any) => {
+      .then((url: string) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -54,7 +55,7 @@ function Row({ title, fetchUrl, isLargeRow }: Props) {
           );
         }
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
@@ -89,7 +90,7 @@ function Row({ title, fetchUrl, isLargeRow }: Props) {
                 }}
                 className="mySwiper"
               >
-                {movies.map((tempMovie: any) => (
+                {movies.map((tempMovie: IMovie) => (
                   <SwiperSlide key={tempMovie.id}>
                     <LazyLoadImage
                       loading="lazy"
@@ -128,7 +129,7 @@ function Row({ title, fetchUrl, isLargeRow }: Props) {
                 }}
                 className="mySwiper"
               >
-                {movies.map((tempMovie: any) => (
+                {movies.map((tempMovie: IMovie) => (
                   <SwiperSlide>
                     <LazyLoadImage
                       loading="lazy"

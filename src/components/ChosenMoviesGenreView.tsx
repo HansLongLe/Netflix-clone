@@ -4,19 +4,18 @@ import { useEffect, useState } from "react";
 import "./css/SortingByView.css";
 import { useDispatch } from "react-redux";
 import { setMovie } from "../redux/movieSlice";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import movieTrailer from "movie-trailer";
 import { setTrailerUrl } from "../redux/trailerSlice";
+import IMovie from "../types/IMovie";
 
-type Props = {
-  genreId: any;
-};
-
-function ChosenMoviesGenreView({ genreId }: Props) {
+function ChosenMoviesGenreView() {
   const base_url = "https://image.tmdb.org/t/p/original/";
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<IMovie[]>([]);
   const dispatch = useDispatch();
+
+  const genreId = useParams<"sortBy">();
 
   useEffect(() => {
     async function fetchData() {
@@ -29,9 +28,9 @@ function ChosenMoviesGenreView({ genreId }: Props) {
     fetchData();
   }, [genreId]);
 
-  const handleClick = (currentMovie: any) => {
+  const handleClick = (currentMovie: IMovie) => {
     movieTrailer(currentMovie?.name || "")
-      .then((url: any) => {
+      .then((url: string) => {
         if (url === null) {
           dispatch(setTrailerUrl(""));
         } else {
@@ -44,13 +43,13 @@ function ChosenMoviesGenreView({ genreId }: Props) {
           );
         }
       })
-      .catch((error: any) => console.log(error));
+      .catch((error: Error) => console.log(error));
 
     dispatch(setMovie(currentMovie));
   };
   return (
     <div className="contentView">
-      {movies.map((tempMovie: any) => (
+      {movies.map((tempMovie: IMovie) => (
         <Link to={{ pathname: `/description/${tempMovie.id}` }}>
           <div className="container">
             <LazyLoadImage

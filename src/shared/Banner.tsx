@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import requests from "../requests";
 import "./css/Banner.css";
 import ReactPlayer from "react-player";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { setMovie } from "../redux/movieSlice";
 import { setTrailerUrl } from "../redux/trailerSlice";
 import { TiThList } from "react-icons/ti";
@@ -14,8 +14,8 @@ import Nav from "./Nav";
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Banner() {
-  const { movie } = useSelector((state: any) => state.movie);
-  const { trailerUrl } = useSelector((state: any) => state.trailer);
+  const { movie } = useSelector((state: RootStateOrAny) => state.movie);
+  const { trailerUrl } = useSelector((state: RootStateOrAny) => state.trailer);
   const dispatch = useDispatch();
 
   useEffect(() => {
