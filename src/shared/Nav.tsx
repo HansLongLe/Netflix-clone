@@ -3,20 +3,22 @@ import "./css/Nav.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../redux/currentUserSlice";
 import { FiLogOut } from "react-icons/fi";
 import { HiViewList } from "react-icons/hi";
 
 function Nav() {
   const [searchedText, setSearchText] = useState("");
-  const { currentUser } = useSelector((state: any) => state.currentUser);
+  const { currentUser } = useSelector(
+    (state: RootStateOrAny) => state.currentUser
+  );
   const [visible, setVisible] = useState(false);
   const [defaultMenu, setDefaultMenu] = useState(true);
   const dispatch = useDispatch();
   const params = useParams();
 
-  function handleKeyDown(event: any) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
       window.location.href = `/browse/search/${searchedText}`;
     }

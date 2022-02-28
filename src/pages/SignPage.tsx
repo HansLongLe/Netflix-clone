@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useState, useEffect } from "react";
 import "./css/SignPage.css";
 import { db } from "../firebase";
@@ -13,6 +13,7 @@ import EmailVerificationModal from "../components/EmailVerificationModal";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../redux/currentUserSlice";
 import LoadingPage from "./LoadingPage";
+import { Link } from "react-router-dom";
 
 function SignPage() {
   const [loading, setLoading] = useState(true);
@@ -48,13 +49,13 @@ function SignPage() {
     }, 640);
   }
 
-  function handleKeyDownSignUp(event: any) {
+  function handleKeyDownSignUp(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
       signUpFunction();
     }
   }
 
-  function handleKeyDownSignIn(event: any) {
+  function handleKeyDownSignIn(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter") {
       signInFunction();
     }
@@ -188,6 +189,10 @@ function SignPage() {
         window.location.href = "/";
       } catch (error: any) {
         console.log(error.message);
+        let tempErrors = errors;
+        tempErrors["password"] =
+          "The password is invalid, or the account does not exist.";
+        setErrors(tempErrors);
       }
     }
   }
@@ -220,7 +225,7 @@ function SignPage() {
     setVisible(!visible);
   }
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFields((prevState) => ({
       ...prevState,
@@ -266,17 +271,13 @@ function SignPage() {
             }`}
           >
             <div className="netflixLogo">
-              <a
-                href="https://www.netflix.com/"
-                target={"_blank"}
-                rel="noreferrer"
-              >
+              <Link to={{ pathname: "/" }}>
                 <img
                   className="netflixLogoImg"
                   src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
                   alt="Netflix logo"
                 />
-              </a>
+              </Link>
             </div>
             <h1 className="netflixText">
               WATCH TV SHOWS & MOVIES ANYWHERE AND ANYTIME.
@@ -404,17 +405,13 @@ function SignPage() {
               }`}
             >
               <div className="netflixLogo">
-                <a
-                  href="https://www.netflix.com/"
-                  target={"_blank"}
-                  rel="noreferrer"
-                >
+                <Link to={{ pathname: "/" }}>
                   <img
                     className="netflixLogoImg"
                     src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
                     alt="Netflix logo"
                   />
-                </a>
+                </Link>
               </div>
               <h1 className="netflixText">
                 START NOW TO GET UNLIMITED MOVIES, TV SHOWS & MORE.

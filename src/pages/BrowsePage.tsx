@@ -10,7 +10,7 @@ import SortingPanel from "../shared/SortingPanel";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function BrowsePage() {
-  const params = useParams();
+  const params = useParams<"type">();
 
   return (
     <div className="browsePage">
@@ -23,15 +23,15 @@ function BrowsePage() {
           </LazyLoadComponent>
         ) : params.type === "movies" ? (
           <LazyLoadComponent>
-            <ChosenMoviesGenreView genreId={params} />
+            <ChosenMoviesGenreView />
           </LazyLoadComponent>
         ) : params.type === "tv" ? (
           <LazyLoadComponent>
-            <ChosenTVGenreView genreId={params} />
+            <ChosenTVGenreView />
           </LazyLoadComponent>
         ) : (
           <LazyLoadComponent>
-            <SearchByTextView searchedText={params} />
+            <SearchByTextView />
           </LazyLoadComponent>
         )}
       </div>

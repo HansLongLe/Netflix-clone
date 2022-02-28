@@ -6,6 +6,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Link, useParams } from "react-router-dom";
 import { setMovie } from "../redux/movieSlice";
 import { useDispatch } from "react-redux";
+import IMovie from "../types/IMovie";
 
 type Props = {
   headerItem: number;
@@ -13,7 +14,7 @@ type Props = {
 
 function MovieDescriptionSimilar({ headerItem }: Props) {
   const base_url = "https://image.tmdb.org/t/p/original";
-  const [similarMovies, setSimilarMovies] = useState<any>([]);
+  const [similarMovies, setSimilarMovies] = useState<IMovie[]>([]);
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -35,7 +36,7 @@ function MovieDescriptionSimilar({ headerItem }: Props) {
           request = await axios.get(
             `/tv/${params.id}/recommendations?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
           );
-          setSimilarMovies(request.data);
+          setSimilarMovies(request.data.results);
         }
       }
 
@@ -44,7 +45,7 @@ function MovieDescriptionSimilar({ headerItem }: Props) {
     fetchData();
   }, [params.id]);
 
-  function handleClick(similarMovie: any) {
+  function handleClick(similarMovie: IMovie) {
     dispatch(setMovie(similarMovie));
   }
 
@@ -74,7 +75,7 @@ function MovieDescriptionSimilar({ headerItem }: Props) {
               }}
               className="mySwiper"
             >
-              {similarMovies.results.map((similarMovie: any) => (
+              {similarMovies.map((similarMovie: IMovie) => (
                 <>
                   {similarMovie.backdrop_path !== null ? (
                     <SwiperSlide>

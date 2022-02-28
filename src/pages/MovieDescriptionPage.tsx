@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/MovieDescriptionPage.css";
-import { useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 import axios from "../axios";
 import { useEffect, useState } from "react";
 import Nav from "../shared/Nav";
@@ -13,7 +13,7 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 function MovieDescriptionPage() {
   const base_url = "https://image.tmdb.org/t/p/original/";
 
-  const { movie } = useSelector((state: any) => state.movie);
+  const { movie } = useSelector((state: RootStateOrAny) => state.movie);
   const [movieInfo, setMovieInfo] = useState<any>(null);
   const [chosenHeaderItem, setChosenHeaderItem] = useState(0);
   const params = useParams();
