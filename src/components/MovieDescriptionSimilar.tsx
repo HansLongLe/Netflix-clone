@@ -52,7 +52,7 @@ function MovieDescriptionSimilar({ headerItem }: Props) {
   return (
     <>
       {headerItem === 2 ? (
-        similarMovies !== null ? (
+        similarMovies !== null && similarMovies ? (
           <div className="moreLikeThisDiv">
             <Swiper
               slidesPerView={1}
@@ -75,7 +75,7 @@ function MovieDescriptionSimilar({ headerItem }: Props) {
               }}
               className="mySwiper"
             >
-              {similarMovies.map((similarMovie: IMovie) => (
+              {Array.isArray(similarMovies) && similarMovies.map((similarMovie: IMovie) => (
                 <>
                   {similarMovie.backdrop_path !== null ? (
                     <SwiperSlide>

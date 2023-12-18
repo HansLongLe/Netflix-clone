@@ -225,7 +225,7 @@ function SignPage() {
     setVisible(!visible);
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFields((prevState) => ({
       ...prevState,
