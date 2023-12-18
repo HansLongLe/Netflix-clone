@@ -75,33 +75,34 @@ function MovieDescriptionSimilar({ headerItem }: Props) {
               }}
               className="mySwiper"
             >
-              {Array.isArray(similarMovies) && similarMovies.map((similarMovie: IMovie) => (
-                <>
-                  {similarMovie.backdrop_path !== null ? (
-                    <SwiperSlide>
-                      <Link
-                        to={{ pathname: `/description/${similarMovie.id}` }}
-                        style={{ color: "white", textDecoration: "none" }}
-                      >
-                        <img
-                          className="similarMovieImg"
-                          key={similarMovie.id}
-                          src={`${base_url}${similarMovie.backdrop_path}`}
-                          alt="similar movie"
-                          onClick={() => handleClick(similarMovie)}
-                        />
-                        <h3 className="similarMovieTitle">
-                          {similarMovie?.title ||
-                            similarMovie.name ||
-                            similarMovie?.original_name}
-                        </h3>
-                      </Link>
-                    </SwiperSlide>
-                  ) : (
-                    ""
-                  )}
-                </>
-              ))}
+              {Array.isArray(similarMovies) &&
+                similarMovies.map((similarMovie: IMovie) => (
+                  <>
+                    {similarMovie.backdrop_path !== null ? (
+                      <SwiperSlide>
+                        <Link
+                          to={{ pathname: `/description/${similarMovie.id}` }}
+                          style={{ color: "white", textDecoration: "none" }}
+                        >
+                          <img
+                            className="similarMovieImg"
+                            key={similarMovie.id}
+                            src={`${base_url}${similarMovie.backdrop_path}`}
+                            alt="similar movie"
+                            onClick={() => handleClick(similarMovie)}
+                          />
+                          <h3 className="similarMovieTitle">
+                            {similarMovie?.title ||
+                              similarMovie.name ||
+                              similarMovie?.original_name}
+                          </h3>
+                        </Link>
+                      </SwiperSlide>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                ))}
             </Swiper>
           </div>
         ) : (
